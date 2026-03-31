@@ -1,0 +1,58 @@
+Hãy xây dựng một REST API bằng Python dùng FastAPI để so sánh 2 file PDF export đẹp.
+
+Yêu cầu bài toán:
+- Chỉ so sánh nội dung hiển thị cho người dùng đọc được.
+- Không cần OCR.
+- Không xử lý PDF scan.
+- Không so sánh binary file, metadata, font nội bộ hay object structure của PDF.
+- Mục tiêu là tìm ra các khác biệt về text hiển thị giữa 2 file PDF.
+
+Tech stack bắt buộc:
+- PyMuPDF để đọc PDF và extract text theo từng page
+- FastAPI để tạo REST API
+- Uvicorn để chạy server
+- Pydantic để định nghĩa request/response schema
+- difflib để so sánh text
+
+Yêu cầu kỹ thuật:
+1. Tạo endpoint POST /compare-pdf
+2. Endpoint nhận vào 2 file PDF qua multipart/form-data
+3. Dùng PyMuPDF đọc từng file PDF
+4. Trích xuất text theo từng page
+5. Normalize text trước khi compare:
+   - trim khoảng trắng đầu/cuối
+   - thay nhiều khoảng trắng liên tiếp thành 1 space
+   - chuẩn hóa line break
+6. So sánh theo từng page
+7. Trong từng page, so sánh theo line bằng difflib
+8. Trả về JSON gồm:
+   - same: boolean
+   - summary:
+     - total_pages_a
+     - total_pages_b
+     - different_pages
+   - differences:
+     - page
+     - added
+     - removed
+9. Nếu số page 2 file khác nhau thì vẫn xử lý và báo rõ các page dư
+10. Code phải rõ ràng, tách hàm hợp lý:
+   - extract_pdf_pages_text(...)
+   - normalize_text(...)
+   - compare_pages(...)
+11. Có xử lý lỗi:
+   - file không phải PDF
+   - file rỗng
+   - lỗi đọc PDF
+12. Viết theo cấu trúc dễ mở rộng cho production
+13. Thêm ví dụ response JSON mẫu
+14. Thêm hướng dẫn chạy local:
+   - pip install ...
+   - uvicorn main:app --reload
+
+Yêu cầu thêm:
+- Ưu tiên code sạch, dễ đọc
+- Không dùng OCR
+- Không dùng OpenCV
+- Không render PDF thành ảnh
+- Chỉ tập trung vào compare nội dung text hiển thị

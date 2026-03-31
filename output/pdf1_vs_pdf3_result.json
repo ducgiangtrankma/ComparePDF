@@ -1,0 +1,30 @@
+{
+  "same": false,
+  "summary": {
+    "total_pages_a": 3,
+    "total_pages_b": 3,
+    "different_pages": 2
+  },
+  "differences": [
+    {
+      "page": 1,
+      "added": [
+        "...be longer than the other? [Idigress.] Here’s some Latin. Lorem ipsum...",
+        "...Maecenas mattis. Sed convallis tristique [giang.] Proin ut ligula vel nunc..."
+      ],
+      "removed": [
+        "...be longer than the other? [I digress.] Here’s some Latin. Lorem ipsum...",
+        "...Maecenas mattis. Sed convallis tristique [sem.] Proin ut ligula vel nunc..."
+      ]
+    },
+    {
+      "page": 2,
+      "added": [
+        "...mi a tellus consequat imperdiet. [thao] sapien. Proin quam. Etiam ultrices...."
+      ],
+      "removed": [
+        "...mi a tellus consequat imperdiet. [Vestibulum] sapien. Proin quam. Etiam ultrices...."
+      ]
+    }
+  ]
+}
