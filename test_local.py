@@ -98,8 +98,10 @@ def run_jobs(jobs: list[tuple[str, Path, Path]]) -> None:
         out_path = save_result(name, result)
 
         diff_count = result["summary"]["different_pages"]
+        elapsed = result.get("elapsed_ms", 0)
         status = "SAME" if result["same"] else f"DIFF ({diff_count} page(s))"
         print(f"  Result : {status}")
+        print(f"  Time   : {elapsed} ms")
         print(f"  Saved  : {out_path}\n")
 
 

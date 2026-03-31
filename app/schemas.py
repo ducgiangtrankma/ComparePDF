@@ -13,10 +13,14 @@ class PageDifference(BaseModel):
     removed: list[str]
 
 
-class CompareResponse(BaseModel):
+class CompareResult(BaseModel):
     same: bool
     summary: DiffSummary
     differences: list[PageDifference]
+
+
+class CompareResponse(CompareResult):
+    elapsed_ms: float
 
     model_config = {
         "json_schema_extra": {
@@ -35,6 +39,7 @@ class CompareResponse(BaseModel):
                             "removed": ["Original line from file A"],
                         }
                     ],
+                    "elapsed_ms": 123.45,
                 }
             ]
         }

@@ -1,7 +1,7 @@
 import difflib
 from itertools import zip_longest
 
-from app.schemas import CompareResponse, DiffSummary, PageDifference
+from app.schemas import CompareResult, DiffSummary, PageDifference
 from app.services.text_processor import strip_page_number, to_words
 
 CONTEXT_WORDS = 5
@@ -56,7 +56,7 @@ def _diff_words(
     return added, removed
 
 
-def compare_pages(pages_a: list[str], pages_b: list[str]) -> CompareResponse:
+def compare_pages(pages_a: list[str], pages_b: list[str]) -> CompareResult:
     """Compare two lists of page texts and produce a structured diff result."""
     differences: list[PageDifference] = []
 
@@ -80,7 +80,7 @@ def compare_pages(pages_a: list[str], pages_b: list[str]) -> CompareResponse:
         different_pages=len(differences),
     )
 
-    return CompareResponse(
+    return CompareResult(
         same=len(differences) == 0,
         summary=summary,
         differences=differences,
