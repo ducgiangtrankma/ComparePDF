@@ -69,7 +69,7 @@ def compare_via_api(path_a: Path, path_b: Path) -> dict:
 def save_result(name: str, result: dict) -> Path:
     OUTPUT_DIR.mkdir(exist_ok=True)
     out_path = OUTPUT_DIR / f"{name}_result.json"
-    out_path.write_text(json.dumps(result, indent=2, ensure_ascii=False))
+    out_path.write_text(json.dumps(result, indent=2, ensure_ascii=False), encoding="utf-8")
     return out_path
 
 
