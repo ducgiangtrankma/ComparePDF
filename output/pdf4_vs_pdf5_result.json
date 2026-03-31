@@ -1,0 +1,71 @@
+{
+  "same": false,
+  "summary": {
+    "total_pages_a": 1,
+    "total_pages_b": 1,
+    "different_pages": 1
+  },
+  "differences": [
+    {
+      "page": 1,
+      "added": [
+        "Tên khách hàng/ Customer's [Name: TRAN] DUC GIANG Địa chỉ/ Address:...",
+        "...khoản/ Account's name: Số tài [khoản/ Account's number:] Loại tài khoản/ Account Type:...",
+        "...khoản/ Account's number: Loại tài [khoản/ Account] Type: Loại tiền/ Currency TRAN...",
+        "...dư Transaction Date Reference Number [Explanation] Debit Credit Balance 03/12/2025 668V009253374186...",
+        "...Duc Giang chuyen tien QR [17,000] 5,810 06/12/2025 668ITC125340A4YA NGO BA...",
+        "...TRAN DUC GIANG tai TPBANK [15/12/2025] 668V00925349AFPQ Tran Duc Giang chuyen...",
+        "...Giang chuyen tien QR 10,000 [13,995,810 15/12/2025] 668TTMB25349A4UF THANH TOAN - DIEN-EVNHN...",
+        "...DIEN-EVNHN - 497,541 13,498,269 PD16000151244 [15/12/2025 668TTMB25349A4UH] THANH TOAN - NUOC-CNHADONG -...",
+        "...408011 97,750 13,400,519 15/12/2025 668V00925349AJVR [Tran Duc Giang chuyen tien QR] 50,000 13,350,519 15/12/2025 668V60025349AI1Q KOVQR071A6F2I7...",
+        "...668V600253507669 KOVQR071A8VIR8 8,300 12,697,119 16/12/2025 [668V00925350A5SC Tran] Duc Giang chuyen tien QR...",
+        "...tien QR 100,000 12,597,119 16/12/2025 [668ITC125350A7HV TRAN] DUC GIANG chuyen tien 27,850,000...",
+        "...chuyen tien 27,850,000 40,447,119 16/12/2025 [668V00925350A920 Quy] va trap le 27,000,000 13,447,119...",
+        "...trap le 27,000,000 13,447,119 17/12/2025 [668ITC1253516402 PHAN] THAO ANH chuyen tien 20,000...",
+        "...chuyen tien 20,000 13,467,119 18/12/2025 [668V009253524065 Tran] Duc Giang chuyen tien QR...",
+        "...tien QR 17,000 13,450,119 18/12/2025 [668V600253529965 Tran] Duc Giang chuyen tien QR...",
+        "...tien QR 45,000 13,405,119 19/12/2025 [668V009253533705 Tran Duc Giang chuyen tien QR 17,000] 13,388,119 19/12/2025 668V009253538692 Tran Duc...",
+        "...tien QR 17,000 13,388,119 19/12/2025 [668V009253538692 Tran Duc Giang chuyen tien QR 50,000] 13,338,119 19/12/2025 668V600253538017 KOVQR071AG8FVH 8,500...",
+        "...50,000 13,338,119 19/12/2025 668V600253538017 KOVQR071AG8FVH [8,500] 13,329,619 19/12/2025 668V00925353A3AR Tran Duc...",
+        "...668V600253538017 KOVQR071AG8FVH 8,500 13,329,619 19/12/2025 [668V00925353A3AR Tran Duc Giang chuyen tien 130,000] 13,199,619 22/12/2025 668V60025356AIIS VQRLOAMB25061452026 110,000...",
+        "...13,199,619 22/12/2025 668V60025356AIIS VQRLOAMB25061452026 110,000 [13,089,619] 22/12/2025 668V60225356A4MI MBVCB.12256623625.5356BFTVG2RVNNK3. 60,000 13,149,619...",
+        "...13,089,619 22/12/2025 668V60225356A4MI MBVCB.12256623625.5356BFTVG2RVNNK3. 60,000 [13,149,619] KHUAT DUY DUNG chuyen tien.CT...",
+        "...TRAN DUC GIANG tai TPBANK [22/12/2025] 668V00925356AUSB Tran Duc Giang chuyen...",
+        "...GIANG tai TPBANK 22/12/2025 668V00925356AUSB [Tran Duc Giang chuyen tien QR] 10,500,000 2,649,619 23/12/2025 668V009253572443 Tran...",
+        "...chuyen tien QR 10,500,000 2,649,619 [23/12/2025] 668V009253572443 Tran Duc Giang chuyen...",
+        "...QR 10,500,000 2,649,619 23/12/2025 668V009253572443 [Tran Duc Giang chuyen tien QR 17,000 2,632,619] Trang số: 1 / 7",
+        "...17,000 2,632,619 Trang số: 1 [/ 7]"
+      ],
+      "removed": [
+        "Tên khách hàng/ Customer's [Name:TRAN] DUC GIANG Địa chỉ/ Address:...",
+        "...khoản/ Account's name: Số tài [khoản/Account'snumber:] Loại tài khoản/Account Type: Loại...",
+        "...Số tài khoản/Account'snumber: Loại tài [khoản/Account] Type: Loại tiền/ Currency TRAN...",
+        "...Date Reference Number Debit Credit [Explanation] Balance 17,000 03/12/2025 668V009253374186 Tran...",
+        "...Number Debit Credit Explanation Balance [17,000] 03/12/2025 668V009253374186 Tran Duc Giang...",
+        "...TRAN DUC GIANG tai TPBANK [15/12/202] 668V00925349AFPQ Tran Duc Giang chuyen...",
+        "...Giang chuyen tien QR 10,000 [12,995,810 5] 668TTMB25349A4UF THANH TOAN - DIEN-EVNHN...",
+        "...DIEN-EVNHN - 497,541 13,498,269 PD16000151244 [15/12/202] THANH TOAN - NUOC-CNHADONG -...",
+        "...TOAN - NUOC-CNHADONG - 408011 [15/12/2025 668TTMB25349A4UH] 97,750 13,400,519 5 Tran Duc...",
+        "...408011 15/12/2025 668TTMB25349A4UH 97,750 13,400,519 [5 Tran Duc Giang chuyen tien QR] 15/12/2025 668V00925349AJVR 50,000 13,350,519 15/12/2025...",
+        "...668V600253507669 KOVQR071A8VIR8 8,300 12,697,119 16/12/2025 [668V00925350A5SCTran] Duc Giang chuyen tien QR...",
+        "...tien QR 100,000 12,597,119 16/12/2025 [668ITC125350A7HVTRAN] DUC GIANG chuyen tien 27,850,000...",
+        "...chuyen tien 27,850,000 40,447,119 16/12/2025 [668V00925350A920Quy] va trap le 27,000,000 13,447,119...",
+        "...trap le 27,000,000 13,447,119 17/12/2025 [668ITC1253516402PHAN] THAO ANH chuyen tien 20,000...",
+        "...chuyen tien 20,000 13,467,119 18/12/2025 [668V009253524065Tran] Duc Giang chuyen tien QR...",
+        "...tien QR 17,000 13,450,119 18/12/2025 [668V600253529965Tran] Duc Giang chuyen tien QR...",
+        "...tien QR 45,000 13,405,119 19/12/2025 [668V009253533705Tran Duc Giang chuyen tien QR] 13,388,119 17,000 19/12/2025 668V009253538692Tran Duc...",
+        "...Giang chuyen tien QR 13,388,119 [17,000] 19/12/2025 668V009253538692Tran Duc Giang chuyen...",
+        "...tien QR 13,388,119 17,000 19/12/2025 [668V009253538692Tran Duc Giang chuyen tien QR] 13,338,119 50,000 19/12/2025 668V600253538017 KOVQR071AG8FVH...",
+        "...Giang chuyen tien QR 13,338,119 [50,000] 19/12/2025 668V600253538017 KOVQR071AG8FVH 13,329,619 8,500...",
+        "...50,000 19/12/2025 668V600253538017 KOVQR071AG8FVH 13,329,619 [8,500] 19/12/2025 13,199,619 668V00925353A3AR Tran Duc...",
+        "...KOVQR071AG8FVH 13,329,619 8,500 19/12/2025 13,199,619 [668V00925353A3AR Tran Duc Giang chuyen tien 130,000] 22/12/2025 13,089,619 668V60025356AIIS VQRLOAMB25061452026 110,000...",
+        "...Giang chuyen tien 130,000 22/12/2025 [13,089,619] 668V60025356AIIS VQRLOAMB25061452026 110,000 22/12/2025 13,149,619...",
+        "...13,089,619 668V60025356AIIS VQRLOAMB25061452026 110,000 22/12/2025 [13,149,619] 668V60225356A4MI MBVCB.12256623625.5356BFTVG2RVNNK3. 60,000 KHUAT DUY...",
+        "...TRAN DUC GIANG tai TPBANK [Tran Duc Giang chuyen tien QR 22/12/202] 668V00925356AUSB 10,500,000 2,649,619 Tran Duc...",
+        "...QR 22/12/202 668V00925356AUSB 10,500,000 2,649,619 [Tran Duc Giang chuyen tien QR 5] 668V009253572443 11,000 2,432,619 23/12/202 Trang...",
+        "...chuyen tien QR 5 668V009253572443 [11,000 2,432,619 23/12/202] Trang số: 1 /7 5",
+        "...2,432,619 23/12/202 Trang số: 1 [/7 5]"
+      ]
+    }
+  ]
+}

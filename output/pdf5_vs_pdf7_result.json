@@ -1,0 +1,19 @@
+{
+  "same": false,
+  "summary": {
+    "total_pages_a": 1,
+    "total_pages_b": 1,
+    "different_pages": 1
+  },
+  "differences": [
+    {
+      "page": 1,
+      "added": [
+        "...Duc Giang chuyen tien QR [2,000,619] 17,000 668V009253572443 23/12/2025 7 1..."
+      ],
+      "removed": [
+        "...Duc Giang chuyen tien QR [2,632,619] 17,000 668V009253572443 23/12/2025 7 1..."
+      ]
+    }
+  ]
+}

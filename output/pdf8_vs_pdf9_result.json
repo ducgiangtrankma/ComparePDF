@@ -1,0 +1,29 @@
+{
+  "same": false,
+  "summary": {
+    "total_pages_a": 21,
+    "total_pages_b": 21,
+    "different_pages": 2
+  },
+  "differences": [
+    {
+      "page": 3,
+      "added": [
+        "...Hệ thống sử dụng API [Gatlàm] điểm truy cập chung. Luồng:"
+      ],
+      "removed": [
+        "...Hệ thống sử dụng API [Gateway làm] điểm truy cập chung. Luồng:"
+      ]
+    },
+    {
+      "page": 5,
+      "added": [
+        "...8009 Vận chuyển Rate Service [000 0] Đánh giá sách Recommender AI..."
+      ],
+      "removed": [
+        "...Ship Service 8009 Vận chuyển [Comment] Rate Service 8010 Đánh giá...",
+        "...Vận chuyển Comment Rate Service [8010] Đánh giá sách Recommender AI..."
+      ]
+    }
+  ]
+}
