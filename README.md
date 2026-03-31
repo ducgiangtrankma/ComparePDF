@@ -4,16 +4,45 @@ REST API so sánh nội dung text hiển thị giữa 2 file PDF.
 
 ## Cài đặt
 
+**macOS / Linux:**
+
 ```bash
 python3 -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
+**Windows (CMD):**
+
+```cmd
+python -m venv .venv
+.venv\Scripts\activate
+pip install -r requirements.txt
+```
+
+**Windows (PowerShell):**
+
+```powershell
+python -m venv .venv
+.venv\Scripts\Activate.ps1
+pip install -r requirements.txt
+```
+
+> Nếu PowerShell báo lỗi execution policy, chạy trước: `Set-ExecutionPolicy -Scope CurrentUser RemoteSigned`
+
 ## Chạy server
+
+**macOS / Linux:**
 
 ```bash
 source .venv/bin/activate
+uvicorn app.main:app --reload
+```
+
+**Windows:**
+
+```cmd
+.venv\Scripts\activate
 uvicorn app.main:app --reload
 ```
 
@@ -78,19 +107,38 @@ Test nhanh không cần curl hay Swagger — script tự khởi động server, 
 
 **So sánh 2 file bất kỳ:**
 
+macOS / Linux:
+
 ```bash
 source .venv/bin/activate
 python test_local.py localPDF/pdf1.pdf localPDF/pdf2.pdf
+```
+
+Windows:
+
+```cmd
+.venv\Scripts\activate
+python test_local.py localPDF\pdf1.pdf localPDF\pdf2.pdf
 ```
 
 Kết quả lưu tại `output/pdf1_vs_pdf2_result.json`.
 
 **Auto-discover nhiều cặp (quy ước `*_a.pdf` / `*_b.pdf`):**
 
+macOS / Linux:
+
 ```bash
 source .venv/bin/activate
 python generate_test_pdfs.py   # tạo PDF mẫu (tuỳ chọn)
 python test_local.py           # chạy không tham số → tìm tất cả cặp _a/_b
+```
+
+Windows:
+
+```cmd
+.venv\Scripts\activate
+python generate_test_pdfs.py
+python test_local.py
 ```
 
 ## Cấu trúc project
