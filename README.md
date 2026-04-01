@@ -122,6 +122,22 @@ curl -X POST http://127.0.0.1:8000/compare-pdf \
 
 Test nhanh không cần curl hay Swagger — script tự khởi động server, gọi API, lưu kết quả rồi tắt server.
 
+**Chọn file trực tiếp (interactive):**
+
+macOS / Linux:
+
+```bash
+source .venv/bin/activate
+python test_local.py
+```
+
+Windows:
+
+```cmd
+.venv\Scripts\activate
+python test_local.py
+```
+
 **So sánh 2 file bất kỳ:**
 
 macOS / Linux:
@@ -147,7 +163,7 @@ macOS / Linux:
 ```bash
 source .venv/bin/activate
 python generate_test_pdfs.py   # tạo PDF mẫu (tuỳ chọn)
-python test_local.py           # chạy không tham số → tìm tất cả cặp _a/_b
+python test_local.py --auto    # tìm tất cả cặp _a/_b
 ```
 
 Windows:
@@ -155,7 +171,7 @@ Windows:
 ```cmd
 .venv\Scripts\activate
 python generate_test_pdfs.py
-python test_local.py
+python test_local.py --auto
 ```
 
 ## Cấu trúc project

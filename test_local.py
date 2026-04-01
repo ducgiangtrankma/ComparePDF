@@ -2,7 +2,8 @@
 
 Usage:
   python test_local.py <file_a.pdf> <file_b.pdf>        # compare 2 specific files
-  python test_local.py                                   # auto-discover *_a / *_b pairs
+  python test_local.py                                   # interactive picker (choose from localPDF/)
+  python test_local.py --auto                            # auto-discover *_a / *_b pairs in localPDF/
 
 The script auto-starts the server, runs comparisons through the real API,
 then shuts the server down — identical logic to a production HTTP call.
@@ -27,7 +28,46 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Compare two PDF files locally via the API.")
     parser.add_argument("file_a", nargs="?", help="Path to first PDF")
     parser.add_argument("file_b", nargs="?", help="Path to second PDF")
+    parser.add_argument(
+        "--auto",
+        action="store_true",
+        help="Auto-discover *_a.pdf + *_b.pdf pairs in localPDF/ instead of interactive picker.",
+    )
     return parser.parse_args()
+
+
+def _list_local_pdfs() -> list[Path]:
+    if not LOCAL_PDF_DIR.exists():
+        return []
+    return sorted([p for p in LOCAL_PDF_DIR.glob("*.pdf") if p.is_file()])
+
+
+def _prompt_pick(files: list[Path], title: str) -> Path:
+    print(title)
+    for idx, p in enumerate(files, start=1):
+        print(f"  {idx:>2}. {p.name}")
+
+    while True:
+        raw = input("Chọn số (ví dụ 1): ").strip()
+        if raw.isdigit():
+            n = int(raw)
+            if 1 <= n <= len(files):
+                return files[n - 1]
+        print("Giá trị không hợp lệ, vui lòng chọn lại.\n")
+
+
+def interactive_pick() -> tuple[str, Path, Path]:
+    files = _list_local_pdfs()
+    if not files:
+        print(f"No PDF files found in {LOCAL_PDF_DIR}/")
+        print("Hãy đặt PDF vào localPDF/ rồi chạy lại.")
+        sys.exit(1)
+
+    file_a = _prompt_pick(files, "\n1) Select original file (A):")
+    file_b = _prompt_pick(files, "\n2) Select file edit (B):")
+
+    name = f"{file_a.stem}_vs_{file_b.stem}"
+    return name, file_a, file_b
 
 
 def discover_pairs() -> list[tuple[str, Path, Path]]:
@@ -83,12 +123,16 @@ def build_job_list(args: argparse.Namespace) -> list[tuple[str, Path, Path]]:
         name = f"{pa.stem}_vs_{pb.stem}"
         return [(name, pa, pb)]
 
-    pairs = discover_pairs()
-    if not pairs:
-        print(f"No PDF pairs found in {LOCAL_PDF_DIR}/")
-        print("Usage:  python test_local.py <file_a.pdf> <file_b.pdf>")
-        sys.exit(1)
-    return pairs
+    if args.auto:
+        pairs = discover_pairs()
+        if not pairs:
+            print(f"No PDF pairs found in {LOCAL_PDF_DIR}/")
+            print("Usage:  python test_local.py <file_a.pdf> <file_b.pdf>")
+            sys.exit(1)
+        return pairs
+
+    name, a, b = interactive_pick()
+    return [(name, a, b)]
 
 
 def run_jobs(jobs: list[tuple[str, Path, Path]]) -> None:
