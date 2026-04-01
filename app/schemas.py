@@ -21,6 +21,8 @@ class CompareResult(BaseModel):
 
 
 class CompareResponse(CompareResult):
+    source_file: str
+    target_file: str
     elapsed_ms: float
     ai_summary: str | None = None
 
@@ -42,9 +44,28 @@ class CompareResponse(CompareResult):
                             "added": "...SHARED [CONSTRUCTION] PARTICIPATION...",
                         }
                     ],
+                    "source_file": "Original.pdf",
+                    "target_file": "OriginalEdit.pdf",
                     "elapsed_ms": 123.45,
                     "ai_summary": "Hai file khác nhau ở từ CONSTRUCTION...",
                 }
             ]
         }
     }
+
+
+class SharePointCompareRequest(BaseModel):
+    web_url: str | None = None
+    location_a: str
+    location_b: str
+    fetch_mode: str | None = None
+
+
+class SharePointListFilesRequest(BaseModel):
+    web_url: str | None = None
+    folder_location: str
+    typefile: str = "pdf"
+
+
+class SharePointListFilesResponse(BaseModel):
+    files: list[str]

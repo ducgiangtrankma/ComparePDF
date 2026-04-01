@@ -12,3 +12,11 @@ except ImportError:
 
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY", "").strip()
 OPENAI_MODEL = os.getenv("OPENAI_MODEL", "gpt-4o-mini")
+
+SHAREPOINT_WEB_URL = os.getenv("SHAREPOINT_WEB_URL", "").strip()
+SHAREPOINT_FETCH_MODE = os.getenv("SHAREPOINT_FETCH_MODE", "power_automate").strip()
+SHAREPOINT_FETCH_URL = os.getenv("SHAREPOINT_FETCH_URL", "").strip()
+SHAREPOINT_LIST_URL = os.getenv("SHAREPOINT_LIST_URL", "").strip()
+SHAREPOINT_DELETE_URL = os.getenv("SHAREPOINT_DELETE_URL", "").strip()
+SHAREPOINT_USERNAME = os.getenv("SHAREPOINT_USERNAME", "").strip()
+SHAREPOINT_PASSWORD = os.getenv("SHAREPOINT_PASSWORD", "").strip()

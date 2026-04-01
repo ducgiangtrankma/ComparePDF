@@ -77,6 +77,47 @@ curl -X POST http://127.0.0.1:8000/compare-pdf \
   -F "file_b=@document_v2.pdf"
 ```
 
+### POST /compare-pdf-sharepoint
+
+Tải 2 file từ SharePoint rồi so sánh bằng cùng logic như `/compare-pdf`.
+
+### POST /sharepoint/list-files
+
+Lấy danh sách file trong một folder SharePoint (qua `urlGetAllFilesNameSharePoint`).
+
+```bash
+curl -X POST http://127.0.0.1:8000/sharepoint/list-files \
+  -H "Content-Type: application/json" \
+  -d '{
+    "web_url": "https://yourtenant.sharepoint.com/sites/yoursite",
+    "folder_location": "Shared Documents/Contracts",
+    "typefile": "pdf"
+  }'
+```
+
+Response:
+
+```json
+{
+  "files": ["Original.pdf", "OriginalEdit.pdf"]
+}
+```
+
+```bash
+curl -X POST http://127.0.0.1:8000/compare-pdf-sharepoint \
+  -H "Content-Type: application/json" \
+  -d '{
+    "web_url": "https://yourtenant.sharepoint.com/sites/yoursite",
+    "location_a": "Shared Documents/Contracts/Original.pdf",
+    "location_b": "Shared Documents/Contracts/OriginalEdit.pdf",
+    "fetch_mode": "power_automate"
+  }'
+```
+
+`fetch_mode` hỗ trợ:
+- `power_automate` (khuyến nghị, theo hướng C# hiện tại)
+- `rest` (gọi SharePoint REST trực tiếp)
+
 ### Response mẫu
 
 **Khi 2 file giống nhau:**
@@ -87,9 +128,11 @@ curl -X POST http://127.0.0.1:8000/compare-pdf \
   "summary": {
     "total_pages_a": 3,
     "total_pages_b": 3,
-    "different_pages": 0
+    "total_differences": 0
   },
-  "differences": []
+  "differences": [],
+  "elapsed_ms": 18.23,
+  "ai_summary": null
 }
 ```
 
@@ -100,21 +143,19 @@ curl -X POST http://127.0.0.1:8000/compare-pdf \
   "same": false,
   "summary": {
     "total_pages_a": 3,
-    "total_pages_b": 4,
-    "different_pages": 2
+    "total_pages_b": 3,
+    "total_differences": 1
   },
   "differences": [
     {
-      "page": 2,
-      "added": ["Dòng mới được thêm trong file B"],
-      "removed": ["Dòng gốc từ file A"]
-    },
-    {
-      "page": 4,
-      "added": ["Nội dung trang dư trong file B"],
-      "removed": []
+      "page_a": 1,
+      "page_b": 1,
+      "added": "...SHARED [CONSTRUCTION] PARTICIPATION...",
+      "removed": "...SHARED [COSDFDFTRUCTION] PARTICIPATION..."
     }
-  ]
+  ],
+  "elapsed_ms": 27.41,
+  "ai_summary": "Hai file khác nhau tại 1 vị trí chính..."
 }
 ```
 

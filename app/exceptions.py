@@ -27,3 +27,10 @@ class PDFReadError(PDFError):
 
     def __init__(self, filename: str, reason: str):
         super().__init__(detail=f"Cannot read '{filename}': {reason}")
+
+
+class SharePointError(HTTPException):
+    """Raised when SharePoint file retrieval fails."""
+
+    def __init__(self, detail: str):
+        super().__init__(status_code=status.HTTP_502_BAD_GATEWAY, detail=detail)
