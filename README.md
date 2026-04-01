@@ -48,6 +48,23 @@ uvicorn app.main:app --reload
 
 Server chạy tại `http://127.0.0.1:8000`. Truy cập `http://127.0.0.1:8000/docs` để xem Swagger UI.
 
+### Tóm tắt bằng AI (OpenAI, tùy chọn)
+
+Nếu đặt biến môi trường `OPENAI_API_KEY`, mỗi response của `POST /compare-pdf` sẽ thêm trường `ai_summary` — đoạn văn tiếng Việt ngắn, dễ hiểu, tóm lược các khác biệt. Không có key thì `ai_summary` là `null`, phần so sánh vẫn chạy bình thường.
+
+Cách đơn giản: copy `.env.example` thành file `.env` ở thư mục gốc project, điền `OPENAI_API_KEY=...` (file `.env` đã được gitignore).
+
+```bash
+export OPENAI_API_KEY="sk-..."
+# Tuỳ chọn: mô hình (mặc định gpt-4o-mini)
+export OPENAI_MODEL="gpt-4o-mini"
+uvicorn app.main:app --reload
+```
+
+**Windows (CMD):** `set OPENAI_API_KEY=sk-...` rồi chạy uvicorn.
+
+**Windows (PowerShell):** `$env:OPENAI_API_KEY="sk-..."`
+
 ## Sử dụng
 
 ### POST /compare-pdf

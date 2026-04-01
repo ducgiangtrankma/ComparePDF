@@ -102,6 +102,10 @@ def run_jobs(jobs: list[tuple[str, Path, Path]]) -> None:
         status = "SAME" if result["same"] else f"DIFF ({diff_count} change(s))"
         print(f"  Result : {status}")
         print(f"  Time   : {elapsed} ms")
+        summary_ai = result.get("ai_summary")
+        if summary_ai:
+            preview = summary_ai[:400] + ("…" if len(summary_ai) > 400 else "")
+            print(f"  AI     : {preview}")
         print(f"  Saved  : {out_path}\n")
 
 

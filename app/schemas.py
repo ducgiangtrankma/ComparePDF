@@ -22,6 +22,7 @@ class CompareResult(BaseModel):
 
 class CompareResponse(CompareResult):
     elapsed_ms: float
+    ai_summary: str | None = None
 
     model_config = {
         "json_schema_extra": {
@@ -42,6 +43,7 @@ class CompareResponse(CompareResult):
                         }
                     ],
                     "elapsed_ms": 123.45,
+                    "ai_summary": "Hai file khác nhau ở từ CONSTRUCTION...",
                 }
             ]
         }
