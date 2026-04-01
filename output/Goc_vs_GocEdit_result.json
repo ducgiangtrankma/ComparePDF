@@ -1,0 +1,17 @@
+{
+  "same": false,
+  "summary": {
+    "total_pages_a": 28,
+    "total_pages_b": 28,
+    "total_differences": 1
+  },
+  "differences": [
+    {
+      "page_a": 2,
+      "page_b": 2,
+      "added": "",
+      "removed": "...с другой стороны, Кулеков Искендер [giang tran duc/] Kulekov Iskender Kanatbekovich, a citizen..."
+    }
+  ],
+  "elapsed_ms": 191.29
+}

@@ -1,0 +1,575 @@
+{
+  "same": false,
+  "summary": {
+    "total_pages_a": 28,
+    "total_pages_b": 32,
+    "total_differences": 94
+  },
+  "differences": [
+    {
+      "page_a": 1,
+      "page_b": 1,
+      "added": "...В СТРОИТЕЛЬСТВЕ No Y3-27.03/RCP-SCA/31032026 SHARED [CONSTRUCTION] PARTICIPATION AGREEMENT No. Y3-27.03/RCP-SCA/31032026 Кыргызская...",
+      "removed": "...В СТРОИТЕЛЬСТВЕ No Y3-27.03/RCP-SCA/31032026 SHARED [COSDFDFTRUCTION] PARTICIPATION AGREEMENT No. Y3-27.03/RCP-SCA/31032026 Кыргызская..."
+    },
+    {
+      "page_a": 2,
+      "page_b": 1,
+      "added": "...две тысячи двадцать шестого года [594q3] ДОГОВОР ДОЛЕВОГО УЧАСТИЯ В СТРОИТЕЛЬСТВЕ...",
+      "removed": ""
+    },
+    {
+      "page_a": 2,
+      "page_b": 2,
+      "added": "...ДОЛЕВОГО УЧАСТИЯ В СТРОИТЕЛЬСТВЕ No [Y3-27.03/ RCP-SCA/31032026 SHARED] CONSTRUCTION PARTICIPATION AGREEMENT No. Y3-27.03/RCP-SCA/31032026...",
+      "removed": "...ДОЛЕВОГО УЧАСТИЯ В СТРОИТЕЛЬСТВЕ No [Y3- 27.03/RCP-SCA/31032026 SARED] CONSTRUCTION PARTICIPATION AGREEMENT No. Y3-27.03/RCP-SCA/31032026..."
+    },
+    {
+      "page_a": 2,
+      "page_b": 2,
+      "added": "...12/03/2026, с одной стороны, RCA [LIVING] LIMITED LIABILITY COMPANY, tax ID...",
+      "removed": "...12/03/2026, с одной стороны, RCA [living] LIMITED LI dfdf ABILITY COMPANY,..."
+    },
+    {
+      "page_a": 2,
+      "page_b": 2,
+      "added": "...одной стороны, RCA LIVING LIMITED [LIABILITY] COMPANY, tax ID – 01908202410197,...",
+      "removed": "...одной стороны, RCA living LIMITED [LI dfdf ABILITY] COMPANY, tax ID – 01908202410197,..."
+    },
+    {
+      "page_a": 2,
+      "page_b": 2,
+      "added": "...on the one hand, И [and] Кулеков Искендер Канатбекович / Kulekov...",
+      "removed": "...on the one hand, И [And dfdf] Кулеков Искендер Канатбекович / Kulekov..."
+    },
+    {
+      "page_a": 2,
+      "page_b": 2,
+      "added": "...с другой стороны, Кулеков Искендер [Канатбекович /] Kulekov Iskender Kanatbekovich, a citizen...",
+      "removed": "...с другой стороны, Кулеков Искендер [giang tran duc/] Kulekov Iskender Kanatbekovich, a citizen..."
+    },
+    {
+      "page_a": 2,
+      "page_b": 2,
+      "added": "...Iskender Kanatbekovich, a citizen of [Кыргызстан/ Kyrgyzstan,] personal number 20801200200827, passport/identification card...",
+      "removed": "...Iskender Kanatbekovich, a citizen of [Кыргызстан/Kyrgyzstan,] personal number 20801200200827, passport/identification card..."
+    },
+    {
+      "page_a": 2,
+      "page_b": 2,
+      "added": "...Pervomaiski dis. st. Popov 22, [Кыргызстан/ Kyrgyzstan,] Кыргызстан/Kyrgyzstan, hereinafter referred to as...",
+      "removed": "...Pervomaiski dis. st. Popov 22, [Кыргызстан/Kyrgyzstan,] Кыргызстан/Kyrgyzstan, hereinafter referred to as..."
+    },
+    {
+      "page_a": 2,
+      "page_b": 2,
+      "added": "...(hereinafter referred to as the [“ Agreement”)] as follows. 1. ПРЕДМЕТ ДОГОВОРА...",
+      "removed": "...(hereinafter referred to as the [“Agreement”)] as follows. 1. ПРЕДМЕТ ДОГОВОРА..."
+    },
+    {
+      "page_a": 2,
+      "page_b": 2,
+      "added": "",
+      "removed": "...1. SUBJECT OF THE AGREEMENT [dfdf] 1.1. Стороны договорились, что Застройщик..."
+    },
+    {
+      "page_a": 2,
+      "page_b": 2,
+      "added": "...and conditions of this Agreement. [1] Застройщик осуществляет в качестве застройщика...",
+      "removed": ""
+    },
+    {
+      "page_a": 2,
+      "page_b": 3,
+      "added": "",
+      "removed": "...земельном участке, находящемся по адресу: [Developer carries out as a developer designing and constructing the \"ROYAL CENTRAL PARK\" complex of buildings with business centers, residential, social and infrastructure facilities, and park zones in the city of Bishkek, on a land plot located at the address: 16, Termechikova Str., Bishkek, Kyrgyz Republic, with the] Кыргызская Республика, г. Бишкек, Ленинский..."
+    },
+    {
+      "page_a": 3,
+      "page_b": 3,
+      "added": "...заключения No17786 от 31.10.2025 г.. [Developer carries out as a developer designing and constructing the \"ROYAL CENTRAL PARK\" complex of buildings with business centers, residential, social and infrastructure facilities, and park zones in the city of Bishkek, on a land plot located at the address: 16, Termechikova Str., Bishkek, Kyrgyz Republic, with the] identification code of the real...",
+      "removed": ""
+    },
+    {
+      "page_a": 3,
+      "page_b": 3,
+      "added": "...by the Shared Construction Participant. [2] Во избежание сомнений, Покупная цена...",
+      "removed": ""
+    },
+    {
+      "page_a": 3,
+      "page_b": 4,
+      "added": "...с пунктом 1.5 настоящего Договора. [Стороны также подтвердили и согласились с тем, что Покупная цена будет скорректирована в соответствии с: (а) пунктом 1.7 настоящего Договора (разница между проектной площадью и фактической общей площадью); и (б) пунктом ниже, касающимся изменения применимых налоговых ставок. Стороны согласовали, что Покупная цена корректируется пропорционально в случае изменения применимых ставок налога. Пересмотренная Покупная цена становится действительной с даты вступления в силу таких изменений и Дольщик обязуется заключить дополнительное соглашение, предусматривающее пересмотренную Покупную цену, в течение 10 (десяти) календарных дней с даты получения уведомления от Застройщика.] For the avoidance of doubt,...",
+      "removed": ""
+    },
+    {
+      "page_a": 4,
+      "page_b": 4,
+      "added": "",
+      "removed": "...accordance with Clause 1.5 hereof. [Стороны также подтвердили и согласились с тем, что Покупная цена будет скорректирована в соответствии с: (а) пунктом 1.7 настоящего Договора (разница между проектной площадью и фактической общей площадью); и (б) пунктом ниже, касающимся изменения применимых налоговых ставок. Стороны согласовали, что Покупная цена корректируется пропорционально в случае изменения применимых ставок налога. Пересмотренная Покупная цена становится действительной с даты вступления в силу таких изменений и Дольщик обязуется заключить дополнительное соглашение, предусматривающее пересмотренную Покупную цену, в течение 10 (десяти) календарных дней с даты получения уведомления от Застройщика.] The Parties have further acknowledged..."
+    },
+    {
+      "page_a": 4,
+      "page_b": 4,
+      "added": "...регистрацией настоящего Договора в органе [1.5. For the avoidance of doubt, notwithstanding Clause 1.2, the Shared Construction Participant shall bear any cost, charge or expense including, but not limited to state duties, notary fees, registration fees or any fee, cost, charge, expense or duty of similar nature, in connection with signing, notarization and registration with immovable rights registration authority (hereinafter referred to as the “Registration Authority”), or any 3] регистрации прав на недвижимое имущество...",
+      "removed": ""
+    },
+    {
+      "page_a": 4,
+      "page_b": 5,
+      "added": "",
+      "removed": "...настоящему Договору любому третьему лицу. [1.5. For the avoidance of doubt, notwithstanding Clause 1.2, the Shared Construction Participant shall bear any cost, charge or expense including, but not limited to state duties, notary fees, registration fees or any fee, cost, charge, expense or duty of similar nature, in connection with signing, notarization and registration with immovable rights registration authority (hereinafter referred to as the “Registration Authority”), or any] kind of tax, cost, charge..."
+    },
+    {
+      "page_a": 4,
+      "page_b": 5,
+      "added": "...пола. Дольщик настоящим проинформирован и [соглашается, что в момент регистрации права собственности Дольщика на Квартиру в Регистрирующем органе, в общую полезную площадь Квартиры, подлежащую указанию в Техническом паспорте единицы недвижимости и в договоре купли-продажи Квартиры или договоре передачи права собственности на Квартиру (далее по тексту «Договор передачи права собственности »), не будет входить площадь лоджий и/или балконов и/или террас. Исключение лоджий и/или балконов и/или террас из полезной площади Квартиры в документах, которые будут оформлены Регистрирующим органом, не является ненадлежащим исполнением Застройщиком обязательств по настоящему Договору.] 1.6. The Parties acknowledge that...",
+      "removed": ""
+    },
+    {
+      "page_a": 5,
+      "page_b": 5,
+      "added": "",
+      "removed": "...and hereby agrees that at [соглашается, что в момент регистрации права собственности Дольщика на Квартиру в Регистрирующем органе, в общую полезную площадь Квартиры, подлежащую указанию в Техническом паспорте единицы недвижимости и в договоре купли-продажи Квартиры или договоре передачи права собственности на Квартиру (далее по тексту «Договор передачи права собственности»), не будет входить площадь лоджий и/или балконов и/или террас. Исключение лоджий и/или балконов и/или террас из полезной площади Квартиры в документах, которые будут оформлены Регистрирующим органом, не является ненадлежащим исполнением Застройщиком обязательств по настоящему Договору.] the time of registration of..."
+    },
+    {
+      "page_a": 5,
+      "page_b": 5,
+      "added": "...отражается в окончательном платеже, подлежащем [1.7. The Purchaser acknowledges that the total projected area of the Apartment specified in this Agreement is based on the design documentation, and that the actual total floor area or inner wall area of the Apartment (hereinafter referred to as the “Actual Total Area”) may vary following completion of the initial technical inventory (General Technical Passport for the Building). In the event of any variation to the Actual Total Area of the Apartment, the following adjustments shall apply: (a) Where the Actual Total Area of the Apartment increases or decreases by up to 0.1%, inclusive, the Purchase Price shall remain unchanged; and (b) Where the Actual Total Area of the Apartment increases or decreases by more than 0.1%, the Purchase Price shall increase or decrease (as applicable) on a pro rata basis according to the difference between the actual total area and the Usable Area. 4] оплате до передачи права собственности...",
+      "removed": ""
+    },
+    {
+      "page_a": 5,
+      "page_b": 6,
+      "added": "",
+      "removed": "...для Сторон в этих целях. [1.7. The Purchaser acknowledges that the total projected area of the Apartment specified in this Agreement is based on the design documentation, and that the actual total floor area or inner wall area of the Apartment (hereinafter referred to as the “Actual Total Area”) may vary following completion of the initial technical inventory (General Technical Passport for the Building). In the event of any variation to the Actual Total Area of the Apartment, the following adjustments shall apply: (a) Where the Actual Total Area of the Apartment increases or decreases by up to 0.1%, inclusive, the Purchase Price shall remain unchanged; and (b) Where the Actual Total Area of the Apartment increases or decreases by more than 0.1%, the Purchase Price shall increase or decrease (as applicable) on a pro rata basis according to the difference between the actual total area and the Usable Area.] Any difference arising from the..."
+    },
+    {
+      "page_a": 6,
+      "page_b": 6,
+      "added": "...authority to conclude this Agreement. [5] 2.1.2. Квартира будет оборудована согласно...",
+      "removed": ""
+    },
+    {
+      "page_a": 6,
+      "page_b": 7,
+      "added": "",
+      "removed": "...внутри помещения должны быть выполнены [3.1.3. Handover the Apartment to the Shared Construction Participant under the acceptance certificate (hereinafter referred to as the “Acceptance Certificate”) for finishing works (hereinafter referred to] Дольщиком за свой счет и..."
+    },
+    {
+      "page_a": 7,
+      "page_b": 7,
+      "added": "...должным образом платежи по настоящему [Договору .] Для целей настоящего Договора датой...",
+      "removed": "...должным образом платежи по настоящему [Договору.] Для целей настоящего Договора датой..."
+    },
+    {
+      "page_a": 7,
+      "page_b": 7,
+      "added": "...квартала 2029 года (далее по [3.1.3. Handover the Apartment to the Shared Construction Participant under the acceptance certificate (hereinafter referred to as the “Acceptance Certificate”) for finishing works (hereinafter referred to as the “Finishing Works”), which shall mean interior finishing works to be carried out by the Shared Construction Participant at its own cost and responsibility after the Apartment is transferred for such purpose, excluding any construction or installation works to be performed by the Developer, provided that the Shared Construction Participant has duly made the payments hereunder. For the purposes of this Agreement, the Apartment acceptance date for Finishing Works shall mean (a) the date of signing the Acceptance Certificate by the Developer and the Shared Construction Participant in respect of the relevant Apartment, or (b) in the case described in the paragraph below, the date on which the Apartment is deemed transferred for Finishing Works. The Finishing Works shall be carried out by the Shared Construction Participant in accordance with the Developer’s construction schedule (hereinafter referred to as the “Construction Schedule”). The Parties expect that the acceptance date will occur no later than 1 quarter of 2029 (hereinafter referred to as the “Expected 6] тексту «Ожидаемый срок приемки»). Вместе...",
+      "removed": ""
+    },
+    {
+      "page_a": 7,
+      "page_b": 8,
+      "added": "",
+      "removed": "...к качеству строительно-монтажных работ Застройщика. [as the “Finishing Works”), which shall mean interior finishing works to be carried out by the Shared Construction Participant at its own cost and responsibility after the Apartment is transferred for such purpose, excluding any construction or installation works to be performed by the Developer, provided that the Shared Construction Participant has duly made the payments hereunder. For the purposes of this Agreement, the Apartment acceptance date for Finishing Works shall mean (a) the date of signing the Acceptance Certificate by the Developer and the Shared Construction Participant in respect of the relevant Apartment, or (b) in the case described in the paragraph below, the date on which the Apartment is deemed transferred for Finishing Works. The Finishing Works shall be carried out by the Shared Construction Participant in accordance with the Developer’s construction schedule (hereinafter referred to as the “Construction Schedule”). The Parties expect that the acceptance date will occur no later than 1 quarter of 2029 (hereinafter referred to as the “Expected] Acceptance Date”). However, if this..."
+    },
+    {
+      "page_a": 7,
+      "page_b": 8,
+      "added": "",
+      "removed": "...избежание сомнений Застройщик не несет [3.1.4. Commission the Building in accordance with the Construction Schedule. The commissioning date is expected no later than 2 quarter of 2029 (hereinafter referred to as the “Expected Commissioning Date”). For the avoidance of doubt, the Commissioning Date is expected, the Developer shall not be liable for any] ответственности за какие-либо задержки в..."
+    },
+    {
+      "page_a": 8,
+      "page_b": 8,
+      "added": "...в пункте 3.1.5 настоящего Договора. [3.1.4. Commission the Building in accordance with the Construction Schedule. The commissioning date is expected no later than 2 quarter of 2029 (hereinafter referred to as the “Expected Commissioning Date”). For the avoidance of doubt, the Commissioning Date is expected, the Developer shall not be liable for any] delays in the Construction Schedule...",
+      "removed": ""
+    },
+    {
+      "page_a": 8,
+      "page_b": 8,
+      "added": "",
+      "removed": "...о «Дате ввода в эксплуатацию» [означает Запланированную Дату ввода в эксплуатацию, продленную, отложенную или скорректированную в соответствии с пунктами 3.1.4 и 3.1.5 настоящего Договора по усмотрению Застройщика.] 3.1.5. Temporarily suspend the construction..."
+    },
+    {
+      "page_a": 8,
+      "page_b": 8,
+      "added": "...postponed for a commensurate period. [7 означает Запланированную Дату ввода в эксплуатацию, продленную, отложенную или скорректированную в соответствии с пунктами 3.1.4 и 3.1.5 настоящего Договора по усмотрению Застройщика.] For the avoidance of doubt,...",
+      "removed": ""
+    },
+    {
+      "page_a": 9,
+      "page_b": 9,
+      "added": "...не являются предметом отношений между [3.2.5. Regardless of the price of the Apartment hereunder, establish or change the price of similar apartments, which are not subject of relations between the Developer and the Shared Construction Participant 8] Застройщиком и Дольщиком по настоящему...",
+      "removed": ""
+    },
+    {
+      "page_a": 9,
+      "page_b": 10,
+      "added": "",
+      "removed": "...цене на самостоятельному усмотрению Застройщика. [3.2.5. Regardless of the price of the Apartment hereunder, establish or change the price of similar apartments, which are not subject of relations between the Developer and the Shared Construction Participant] hereunder and sell or otherwise..."
+    },
+    {
+      "page_a": 9,
+      "page_b": 10,
+      "added": "...с подписанием, нотариальным заверением и [регистрацией Договора передачи права собственности несет Дольщик.] 3.4.3. Make full payment, be...",
+      "removed": ""
+    },
+    {
+      "page_a": 10,
+      "page_b": 10,
+      "added": "",
+      "removed": "...by the Shared Construction Participant. [регистрацией Договора передачи права собственности несет Дольщик.] 3.4.4. Соблюдать стандарты и правила,..."
+    },
+    {
+      "page_a": 10,
+      "page_b": 10,
+      "added": "...в правилах проведения ремонтно-отделочных работ [(«Правила »),] с изменениями, вносимыми время от...",
+      "removed": "...в правилах проведения ремонтно-отделочных работ [(«Правила»),] с изменениями, вносимыми время от..."
+    },
+    {
+      "page_a": 10,
+      "page_b": 10,
+      "added": "...3.4.5. При посещении строительной площадки [3.4.5. Comply with occupational health, safety and 9] Здания соблюдать охрану труда, правила...",
+      "removed": ""
+    },
+    {
+      "page_a": 10,
+      "page_b": 11,
+      "added": "",
+      "removed": "...работ для подачи природного газа. [3.4.5. Comply with occupational health, safety and] environment rules or any requirement..."
+    },
+    {
+      "page_a": 10,
+      "page_b": 11,
+      "added": "",
+      "removed": "...всеми муниципальными коммунальными и другими [3.4.9. Sign contracts with all municipal utilities and other services and/or assist the Developer in transferring the utility networks to the relevant utilities entities within 1 (one) month from the registration of title to the Apartment at the Registration Authority.] службами и/или оказать содействие Застройщику..."
+    },
+    {
+      "page_a": 11,
+      "page_b": 11,
+      "added": "...инженерных сетей соответствующим коммунальным службам. [3.4.9. Sign contracts with all municipal utilities and other services and/or assist the Developer in transferring the utility networks to the relevant utilities entities within 1 (one) month from the registration of title to the Apartment at the Registration Authority.] 3.4.10. Вносить своевременные платежи Застройщику...",
+      "removed": ""
+    },
+    {
+      "page_a": 11,
+      "page_b": 11,
+      "added": "",
+      "removed": "...как предусмотрено в пункте 3.4.9 [выше. Оплата должна быть произведена в течение 3 (трех) календарных дней с даты выставления счета. Дольщик соглашается, что в этом случае Застройщик взимает оплату за потребленный объем коммунальных услуг по промышленному тарифу.] 3.4.10. Make timely payment to..."
+    },
+    {
+      "page_a": 11,
+      "page_b": 11,
+      "added": "...(three) calendar days from the [10 выше. Оплата должна быть произведена в течение 3 (трех) календарных дней с даты выставления счета. Дольщик соглашается, что в этом случае Застройщик взимает оплату за потребленный объем коммунальных услуг по промышленному тарифу.] date of billing. The Shared...",
+      "removed": ""
+    },
+    {
+      "page_a": 12,
+      "page_b": 12,
+      "added": "...лицу и полной оплаты за [3.5.3. To terminate this Agreement if the Developer materially breaches its obligations under this Agreement. In this case, it is agreed by the Parties that the Developer will be obliged to return to the Shared Construction Participant the amount of funds paid by the Shared Construction Participant only after the Apartment is sold to and fully paid by a third party and 11] Квартиру третьим лицом, при этом...",
+      "removed": ""
+    },
+    {
+      "page_a": 12,
+      "page_b": 13,
+      "added": "",
+      "removed": "...использование Застройщиком денежных средств Дольщика. [3.5.3. To terminate this Agreement if the Developer materially breaches its obligations under this Agreement. In this case, it is agreed by the Parties that the Developer will be obliged to return to the Shared Construction Participant the amount of funds paid by the Shared Construction Participant only after the Apartment is sold to and fully paid by a third party and] shall return the amount in..."
+    },
+    {
+      "page_a": 13,
+      "page_b": 13,
+      "added": "...не ограничиваясь, налоги, государственные пошлины, [3.6. The Shared Construction Participant has the right to transfer all his/her rights under this Agreement to third parties by concluding an assignment agreement in accordance with Kyrgyz Laws with the written consent of the Developer. Unless otherwise agreed with the Developer, the Shared Construction Participant hereby agrees that this right may only be exercised if there are no outstanding payment obligations to the Developer. All expenses (including but not limited to tax, state duties, notary fees, registration payments) in connection with signing, notarizing and registration of assignment 12] нотариальные услуги, сборы, плату за...",
+      "removed": ""
+    },
+    {
+      "page_a": 13,
+      "page_b": 14,
+      "added": "",
+      "removed": "...предоставило один экземпляр договора Застройщику. [3.6. The Shared Construction Participant has the right to transfer all his/her rights under this Agreement to third parties by concluding an assignment agreement in accordance with Kyrgyz Laws with the written consent of the Developer. Unless otherwise agreed with the Developer, the Shared Construction Participant hereby agrees that this right may only be exercised if there are no outstanding payment obligations to the Developer. All expenses (including but not limited to tax, state duties, notary fees, registration payments) in connection with signing, notarizing and registration of assignment] shall be borne by the..."
+    },
+    {
+      "page_a": 13,
+      "page_b": 14,
+      "added": "",
+      "removed": "...мере, разрешенным законодательством Кыргызской Республики. [3.7. The Shared Construction Participant hereby agrees that: 3.7.1. the Apartment will be transferred by the Developer to the Shared Construction Participant for the purpose of carrying out the Finishing Works only subject to strict compliance with the payment terms, as provided in this Agreement. 3.7.2. upon commissioning of the Building, the Building will be transferred to a management company (hereinafter referred to as the “Management Company”) as appointed by the Developer at its sole discretion, for the management, maintenance, servicing and operation of the Building (hereinafter referred to as the “Management Service”) and the Shared Construction Participant undertakes to sign relevant agreement with the Management Company, unless otherwise provided by Kyrgyz Laws. 3.7.3. should no Management Company be outsourced or in the event of delays in commencement of activities by the Management Company, the Shared Construction Participant shall bear and cover all expenses incurred by the Developer related to the management, maintenance, servicing and operation of the Building (hereinafter referred to as the “Developer Service”). The Shared Construction Participant undertakes to pay the Developer for expenses related to its Developer Service. Failure by the Shared Construction Participant to pay Developer Service when due may result in the application of late payment charges and/or restriction of access to certain utilities and other services, to the extent permitted by Kyrgyz Laws.] 3.7.4. Застройщик имеет безусловное и..."
+    },
+    {
+      "page_a": 14,
+      "page_b": 14,
+      "added": "...2024 года c оплатой Застройщиком [3.7. The Shared Construction Participant hereby agrees that: 3.7.1. the Apartment will be transferred by the Developer to the Shared Construction Participant for the purpose of carrying out the Finishing Works only subject to strict compliance with the payment terms, as provided in this Agreement. 3.7.2. upon commissioning of the Building, the Building will be transferred to a management company (hereinafter referred to as the “Management Company ”) as appointed by the Developer at its sole discretion, for the management, maintenance, servicing and operation of the Building (hereinafter referred to as the “ Management Service”) and the Shared Construction Participant undertakes to sign relevant agreement with the Management Company, unless otherwise provided by Kyrgyz Laws. 3.7.3. should no Management Company be outsourced or in the event of delays in commencement of activities by the Management Company, the Shared Construction Participant shall bear and cover all expenses incurred by the Developer related to the management, maintenance, servicing and operation of the Building (hereinafter referred to as the “Developer Service”). The Shared Construction Participant undertakes to pay the Developer for expenses related to its Developer Service. Failure by the Shared Construction Participant to pay Developer Service when due may result in the application of late payment charges and/or restriction of access to certain utilities and other services, to the extent permitted by Kyrgyz Laws. 3.7.4. the Developer shall have irrevocable and absolute right to mortgage, pledge, encumber, sign any agreements or arrangements, effectuating the creation of security over the land plot of the Building. 3.7.5. the Shared Construction Participant has been duly notified that, due to foreign status of the Developer, the land plot under the Building is on the right of temporary use for a period of 49 (forty-nine) years from November 26, 2024 and the Developer has paid the rent for the entire period of the lease term. The rights of the Shared 13] аренды за весь период срока...",
+      "removed": ""
+    },
+    {
+      "page_a": 14,
+      "page_b": 15,
+      "added": "...каких обстоятельствах не распространяются на [какие-либо] земельные участки Застройщика, не являющиеся...",
+      "removed": "...каких обстоятельствах не распространяются на [какие- либо] земельные участки Застройщика, не являющиеся..."
+    },
+    {
+      "page_a": 14,
+      "page_b": 15,
+      "added": "",
+      "removed": "...предметом не является Квартира Дольщика. [3.7.4. the Developer shall have irrevocable and absolute right to mortgage, pledge, encumber, sign any agreements or arrangements, effectuating the creation of security over the land plot of the Building. 3.7.5. the Shared Construction Participant has been duly notified that, due to foreign status of the Developer, the land plot under the Building is on the right of temporary use for a period of 49 (forty-nine) years from November 26, 2024 and the Developer has paid the rent for the entire period of the lease term. The rights of the Shared] Construction Participants to the land..."
+    },
+    {
+      "page_a": 14,
+      "page_b": 15,
+      "added": "",
+      "removed": "...обязательства по оплате по настоящему [4.2. In the event of non-compliance by the Shared Construction Participant with payment obligations specified in the Agreement, a penalty of 0.05 percent of outstanding amount shall be accrued for each day of delay, but not exceeding 30 (thirty) percent of the Purchase Price of the Agreement. Unless otherwise agreed by the Parties in writing, if the Shared Construction Participant delay any of his/her payment obligations hereunder for more than 20 (twenty)] Договору на более чем 20..."
+    },
+    {
+      "page_a": 15,
+      "page_b": 15,
+      "added": "...предусмотрено в пункте 5 ниже. [4.2. In the event of non-compliance by the Shared Construction Participant with payment obligations specified in the Agreement, a penalty of 0.05 percent of outstanding amount shall be accrued for each day of delay, but not exceeding 30 (thirty) percent of the Purchase Price of the Agreement. Unless otherwise agreed by the Parties in writing, if the Shared Construction Participant delay any of his/her payment obligations hereunder for more than 20 (twenty)] calendar days, such delay shall...",
+      "removed": ""
+    },
+    {
+      "page_a": 15,
+      "page_b": 15,
+      "added": "...provided in Clause 5 below. [14] 4.3. Если Дольщик не сможет...",
+      "removed": ""
+    },
+    {
+      "page_a": 15,
+      "page_b": 16,
+      "added": "...при условии, что Квартира была [продана и полностью оплачена третьим лицом, за] 5.4. In case of termination...",
+      "removed": ""
+    },
+    {
+      "page_a": 16,
+      "page_b": 16,
+      "added": "...fully paid by a third [party, the Developer shall refund the amount actually 15] вычетом: 5.4.1. неустойки за просрочку...",
+      "removed": "...fully paid by a third [продана и полностью оплачена третьим лицом, за] вычетом: 5.4.1. неустойки за просрочку..."
+    },
+    {
+      "page_a": 16,
+      "page_b": 17,
+      "added": "",
+      "removed": "...выплачиваются в сомах банковским переводом. [party, the Developer shall refund the amount actually] paid by the Shared Construction..."
+    },
+    {
+      "page_a": 16,
+      "page_b": 17,
+      "added": "...пунктах 3.5.3 и 3.5.4, соответственно. [5.7. In case of termination of the Agreement on the grounds specified in Clause 5.5.1 and 5.5.2 of the Agreement and subject to absence of dispute between the Parties, the Developer shall return the amount actually paid by the Shared Construction Participant as specified in Clause 3.5.3 and Clause 3.5.4, accordingly. 16] Суммы, подлежащие оплате по настоящему...",
+      "removed": ""
+    },
+    {
+      "page_a": 16,
+      "page_b": 18,
+      "added": "",
+      "removed": "...на указанные расчетный счет Дольщика. [5.7. In case of termination of the Agreement on the grounds specified in Clause 5.5.1 and 5.5.2 of the Agreement and subject to absence of dispute between the Parties, the Developer shall return the amount actually paid by the Shared Construction Participant as specified in Clause 3.5.3 and Clause 3.5.4, accordingly.] The amounts due under this..."
+    },
+    {
+      "page_a": 16,
+      "page_b": 18,
+      "added": "",
+      "removed": "...не подлежат ни при каких [5.8. In case of termination of the Agreement, it is agreed that any improvements, to the Apartment made by the Shared Construction Participant are not subject to] обстоятельствах. Кроме того, Дольщик обязан..."
+    },
+    {
+      "page_a": 17,
+      "page_b": 18,
+      "added": "...дней с даты расторжения Договора. [5.8. In case of termination of the Agreement, it is agreed that any improvements, to the Apartment made by the Shared Construction Participant are not subject to] compensation under any circumstance. The...",
+      "removed": ""
+    },
+    {
+      "page_a": 17,
+      "page_b": 18,
+      "added": "...and extraordinary circumstances existent or [non-existent] on the Execution Date, arisen...",
+      "removed": "...and extraordinary circumstances existent or [non- existent] on the Execution Date, arisen..."
+    },
+    {
+      "page_a": 17,
+      "page_b": 18,
+      "added": "...включают, но не ограничиваются следующими [7.3. Force majeure circumstances shall include, but not limited to the following events if they affect the 17] событиями, если они имеют влияние...",
+      "removed": ""
+    },
+    {
+      "page_a": 17,
+      "page_b": 19,
+      "added": "...электроэнергии, санкции, а также акты [органов власти и любые другие события вне разумного контроля Сторон.] fulfilment of obligations of the...",
+      "removed": "...электроэнергии, санкции, а также акты [7.3. Force majeure circumstances shall include, but not limited to the following events if they affect the] fulfilment of obligations of the..."
+    },
+    {
+      "page_a": 18,
+      "page_b": 19,
+      "added": "",
+      "removed": "...reasonable control of the Parties. [органов власти и любые другие события вне разумного контроля Сторон.] 7.4. Если действие непреодолимой силы..."
+    },
+    {
+      "page_a": 18,
+      "page_b": 19,
+      "added": "...8.2. До подачи любой Стороной [каких- либо] обращений в суд или иные...",
+      "removed": "...8.2. До подачи любой Стороной [каких-либо] обращений в суд или иные..."
+    },
+    {
+      "page_a": 18,
+      "page_b": 19,
+      "added": "",
+      "removed": "...arising in the course of [dfdf] execution, amendment or termination, invalidation..."
+    },
+    {
+      "page_a": 18,
+      "page_b": 19,
+      "added": "...court of the Kyrgyz Republic. [18] 9. ПРОЧИЕ УСЛОВИЯ 9. MISCELLANEOUS...",
+      "removed": ""
+    },
+    {
+      "page_a": 18,
+      "page_b": 20,
+      "added": "",
+      "removed": "...по контактным данным, предусмотренным в [9.4. All notices and communications under this Agreement shall be sent by the Parties in writing to the contact details provided herein by mail, e-mail,] настоящем Договоре, по почте, электронной..."
+    },
+    {
+      "page_a": 19,
+      "page_b": 20,
+      "added": "...способом, позволяющим подтвердить их получение. [9.4. All notices and communications under this Agreement shall be sent by the Parties in writing to the contact details provided herein by mail, e-mail,] messengers or other means that...",
+      "removed": ""
+    },
+    {
+      "page_a": 19,
+      "page_b": 20,
+      "added": "...обеспечивать соблюдение Конфиденциальной информации в [9.7. Data contained herein as well as any other data transferred by the Parties to each other in the course of fulfillment of this Agreement shall be deemed confidential (hereinafter referred to as the “Confidential Information”). The Parties undertake not to disclose the Confidential Information during the validity term of this Agreement and thereafter. If either Party is obliged under Kyrgyz Law to disclose any Confidential Information to the state authorities, including foreign state authorities (hereinafter referred to as the “Disclosing Party”), the Disclosing Party shall immediately notify the other Party about such fact. If the 19] течение всего срока действия Договора,...",
+      "removed": ""
+    },
+    {
+      "page_a": 19,
+      "page_b": 21,
+      "added": "",
+      "removed": "...сохранность конфиденциальности раскрытой Конфиденциальной информации. [9.7. Data contained herein as well as any other data transferred by the Parties to each other in the course of fulfillment of this Agreement shall be deemed confidential (hereinafter referred to as the “Confidential Information”) dfdf. The Parties undertake not to disclose the Confidential Information during the validity term of this Agreement and thereafter. If either Party is obliged under Kyrgyz Law to disclose any Confidential Information to the state authorities, including foreign state authorities (hereinafter referred to as the “Disclosing Party”), the Disclosing Party shall immediately notify the other Party about such fact. If the] other Party is duly notified,..."
+    },
+    {
+      "page_a": 19,
+      "page_b": 21,
+      "added": "...breach of its obligation on [non- disclosure] of the Confidential Information and...",
+      "removed": "...breach of its obligation on [non-disclosure] of the Confidential Information and..."
+    },
+    {
+      "page_a": 20,
+      "page_b": 21,
+      "added": "",
+      "removed": "...юридическую силу; по одному экземпляру [для каждой Стороны, один для нотариуса, один для Регистрирующего органа.] 9.11. This Agreement is made..."
+    },
+    {
+      "page_a": 20,
+      "page_b": 21,
+      "added": "...retains one copy of this [20 для каждой Стороны, один для нотариуса, один для Регистрирующего органа.] Agreement, one copy for notary,...",
+      "removed": ""
+    },
+    {
+      "page_a": 20,
+      "page_b": 22,
+      "added": "",
+      "removed": "...prevail. 10. ПРИЛОЖЕНИЯ 10. ANNEXES [dfdf] Все приложения, подписанные Сторонами и..."
+    },
+    {
+      "page_a": 20,
+      "page_b": 22,
+      "added": "",
+      "removed": "...— филиал “Бишкек-Юг” БИК 113020 [Наименование получателя: ОсОО «РЦА Ливинг» Номер счета: 1130020000443016 Валюта счета: KGS] Дольщик/Shared Construction Participant Кулеков Искендер..."
+    },
+    {
+      "page_a": 20,
+      "page_b": 22,
+      "added": "...Pervomaiski dis. st. Popov 22, [Кыргызстан/ Kyrgyzstan] Registered address: г. Бишкек, Первомайский...",
+      "removed": "...Pervomaiski dis. st. Popov 22, [Кыргызстан/Kyrgyzstan] Registered address: г. Бишкек, Первомайский..."
+    },
+    {
+      "page_a": 20,
+      "page_b": 22,
+      "added": "",
+      "removed": "...22, Кыргызстан/Kyrgyzstan Телефон/Phone: 996 998801108 [dfdf] Номер мессенджера / Messenger: 996..."
+    },
+    {
+      "page_a": 21,
+      "page_b": 22,
+      "added": "...998801108 Электронная почта /email: kulekov.i.k@gmail.com [21 Наименование получателя: ОсОО «РЦА Ливинг» Номер счета: 1130020000443016 Валюта счета: KGS] ______________/______________ Ле Тхи Тхань Май...",
+      "removed": ""
+    },
+    {
+      "page_a": 22,
+      "page_b": 23,
+      "added": "...Канатбекович / Kulekov Iskender Kanatbekovich [22] ПРИЛОЖЕНИЕ 1 – ГРАФИК ПЛАТЕЖЕЙ...",
+      "removed": "...Канатбекович / Kulekov Iskender Kanatbekovich [Shared Construction Participation Agreement/Договор долевого участия в строительстве Royal Central Park/Роял Централ Парк 1] ПРИЛОЖЕНИЕ 1 – ГРАФИК ПЛАТЕЖЕЙ..."
+    },
+    {
+      "page_a": 22,
+      "page_b": 24,
+      "added": "...цена составляет/The Purchase Price is: [] Сумма цифрами/Amount in figures: 11...",
+      "removed": "...цена составляет/The Purchase Price is: [•] Сумма цифрами/Amount in figures: 11..."
+    },
+    {
+      "page_a": 22,
+      "page_b": 24,
+      "added": "...11 118 672 SOM (KGS) [] Сумма прописью/Amount in words: Eleven...",
+      "removed": "...11 118 672 SOM (KGS) [•] Сумма прописью/Amount in words: Eleven..."
+    },
+    {
+      "page_a": 22,
+      "page_b": 24,
+      "added": "...Agreement (SCA) is as follows. [Shared Construction Participation Agreement/Договор долевого участия в строительстве Royal Central Park/Роял Централ Парк 1 Shared Construction Participation Agreement/Договор долевого участия в строительстве Royal Central Park/Роял Централ Парк 2] Этап платежа Payment Stage Срок...",
+      "removed": ""
+    },
+    {
+      "page_a": 22,
+      "page_b": 26,
+      "added": "",
+      "removed": "...10% of the Purchase Price [Платёж 6 Payment 6 Через 20 месяцев с даты заключения Договора 20 months from the Agreement execution date 10% от Покупной цены 10% of the Purchase Price Платёж 7 Payment 7 Через 24 месяца с даты заключения Договора 24 months from the Agreement execution date 10% от Покупной цены 10% of the Purchase Price Платёж 8 Payment 8 Через 28 месяцев с даты заключения Договора 28 months from the Agreement execution date 10% от Покупной цены 10% of the Purchase Price Shared Construction Participation Agreement/Договор долевого участия в строительстве Royal Central Park/Роял Централ Парк 2] 3. ДОПОЛНИТЕЛЬНЫЕ ПОЛОЖЕНИЯ/ADDITIONAL PROVISIONS Все..."
+    },
+    {
+      "page_a": 23,
+      "page_b": 26,
+      "added": "...ул. Разакова, 2, офис No3 [Дольщик/Shared Construction Participant Кулеков Искендер Канатбекович / Kulekov Iskender Kanatbekovich Паспорт/идентификационная карта No Shared Construction Participation Agreement/Договор долевого участия в строительстве Royal Central Park/Роял Централ Парк 3 Этап платежа Payment Stage Срок Timing Сумма платежа Payment Amount Платёж 6 Payment 6 Через 20 месяцев с даты заключения Договора 20 months from the Agreement execution date 10% от Покупной цены 10% of the Purchase Price Платёж 7 Payment 7 Через 24 месяца с даты заключения Договора 24 months from the Agreement execution date 10% от Покупной цены 10% of the Purchase Price Платёж 8 Payment 8 Через 28 месяцев с даты заключения Договора 28 months from the Agreement execution date 10% от Покупной цены 10% of the Purchase Price Платёж 9 Payment 9 Через 32 месяца с даты заключения Договора 32 months from the Agreement execution date 10% от Покупной цены 10% of the Purchase Price Финальный платёж Final Payment При передаче Квартиры в соответствии с уведомлением Застройщика Upon handover of the Apartment as notified by the Developer Остаток до достижения 100% Покупной цены Balance to reach 100% of the Purchase Price] Почтовый адрес (обязательный для уведомлений):...",
+      "removed": ""
+    },
+    {
+      "page_a": 23,
+      "page_b": 27,
+      "added": "",
+      "removed": "...счета: 1130020000443016 Валюта счета: KGS [Дольщик/Shared Construction Participant Кулеков Искендер Канатбекович / Kulekov Iskender Kanatbekovich Паспорт/идентификационная карта No] ID0638634 passport/identification card No: ID0638634..."
+    },
+    {
+      "page_a": 23,
+      "page_b": 27,
+      "added": "...Канатбекович / Kulekov Iskender Kanatbekovich [Shared Construction Participation Agreement/Договор долевого участия в строительстве Royal Central Park/Роял Централ Парк 4] ПРИЛОЖЕНИЕ 2 СПЕЦИФИКАЦИЯ ОТДЕЛКИ ЗДАНИЯ...",
+      "removed": "...Канатбекович / Kulekov Iskender Kanatbekovich [Этап платежа Payment Stage Срок Timing Сумма платежа Payment Amount Платёж 9 Payment 9 Через 32 месяца с даты заключения Договора 32 months from the Agreement execution date 10% от Покупной цены 10% of the Purchase Price Финальный платёж Final Payment При передаче Квартиры в соответствии с уведомлением Застройщика Upon handover of the Apartment as notified by the Developer Остаток до достижения 100% Покупной цены Balance to reach 100% of the Purchase Price] ПРИЛОЖЕНИЕ 2 СПЕЦИФИКАЦИЯ ОТДЕЛКИ ЗДАНИЯ..."
+    },
+    {
+      "page_a": 25,
+      "page_b": 28,
+      "added": "...The ceiling is left unfinished. [1] TITLE НАЗВАНИЕ APARTMENT AREAS ЗОНЫ...",
+      "removed": ""
+    },
+    {
+      "page_a": 25,
+      "page_b": 29,
+      "added": "...double-glazed insulated and soundproof glass. [Оборудование/ Equipment] Кухня Kitchen Кухонная мебель не...",
+      "removed": "...double-glazed insulated and soundproof glass. [Оборудование/Equipment] Кухня Kitchen Кухонная мебель не..."
+    },
+    {
+      "page_a": 26,
+      "page_b": 29,
+      "added": "...for future video doorbell installation) [2] TITLE НАЗВАНИЕ APARTMENT AREAS ЗОНЫ...",
+      "removed": ""
+    },
+    {
+      "page_a": 27,
+      "page_b": 30,
+      "added": "...Канатбекович / Kulekov Iskender Kanatbekovich [3] ПРИЛОЖЕНИЕ 3: АКЦИОННЫЕ ПРОГРАММЫ ANNEX...",
+      "removed": ""
+    },
+    {
+      "page_a": 28,
+      "page_b": 31,
+      "added": "...ответственности достоверного перевода текста _______________________ [1 Тридцать первое] марта две тысячи двадцать шестого...",
+      "removed": "...ответственности достоверного перевода текста _______________________ [Двадцать четвертое] марта две тысячи двадцать шестого..."
+    },
+    {
+      "page_a": null,
+      "page_b": 32,
+      "added": "...характера 2000 сом Нотариус ____________ [2]",
+      "removed": ""
+    }
+  ],
+  "elapsed_ms": 204.69
+}

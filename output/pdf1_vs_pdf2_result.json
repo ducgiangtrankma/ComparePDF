@@ -3,7 +3,8 @@
   "summary": {
     "total_pages_a": 3,
     "total_pages_b": 3,
-    "different_pages": 0
+    "total_differences": 0
   },
-  "differences": []
+  "differences": [],
+  "elapsed_ms": 16.46
 }

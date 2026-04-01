@@ -1,0 +1,29 @@
+{
+  "same": false,
+  "summary": {
+    "total_pages_a": 28,
+    "total_pages_b": 28,
+    "total_differences": 3
+  },
+  "differences": [
+    {
+      "page_a": 2,
+      "page_b": 2,
+      "added": "",
+      "removed": "...с другой стороны, Кулеков Искендер [giang tran duc/] Kulekov Iskender Kanatbekovich, a citizen..."
+    },
+    {
+      "page_a": 2,
+      "page_b": 2,
+      "added": "...citizen of Кыргызстан/Kyrgyzstan, personal number [,] passport/identification card No. ID0638634 ,...",
+      "removed": "...citizen of Кыргызстан/Kyrgyzstan, personal number [20801200200827,] passport/identification card No. ID0638634 ,..."
+    },
+    {
+      "page_a": 3,
+      "page_b": 3,
+      "added": "...17786 dated October 31, 2025. [20801200200827] Строительный объект (Здание) зарегистрирован в...",
+      "removed": ""
+    }
+  ],
+  "elapsed_ms": 193.58
+}

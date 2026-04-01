@@ -3,27 +3,27 @@
   "summary": {
     "total_pages_a": 21,
     "total_pages_b": 21,
-    "different_pages": 2
+    "total_differences": 3
   },
   "differences": [
     {
-      "page": 3,
-      "added": [
-        "...Hệ thống sử dụng API [Gatlàm] điểm truy cập chung. Luồng:"
-      ],
-      "removed": [
-        "...Hệ thống sử dụng API [Gateway làm] điểm truy cập chung. Luồng:"
-      ]
+      "page_a": 3,
+      "page_b": 3,
+      "added": "...Hệ thống sử dụng API [Gatlàm] điểm truy cập chung. Luồng:...",
+      "removed": "...Hệ thống sử dụng API [Gateway làm] điểm truy cập chung. Luồng:..."
     },
     {
-      "page": 5,
-      "added": [
-        "...8009 Vận chuyển Rate Service [000 0] Đánh giá sách Recommender AI..."
-      ],
-      "removed": [
-        "...Ship Service 8009 Vận chuyển [Comment] Rate Service 8010 Đánh giá...",
-        "...Vận chuyển Comment Rate Service [8010] Đánh giá sách Recommender AI..."
-      ]
+      "page_a": 5,
+      "page_b": 5,
+      "added": "",
+      "removed": "...Ship Service 8009 Vận chuyển [Comment] Rate Service 8010 Đánh giá..."
+    },
+    {
+      "page_a": 5,
+      "page_b": 5,
+      "added": "...8009 Vận chuyển Rate Service [000 0] Đánh giá sách Recommender AI...",
+      "removed": "...Vận chuyển Comment Rate Service [8010] Đánh giá sách Recommender AI..."
     }
-  ]
+  ],
+  "elapsed_ms": 57.95
 }

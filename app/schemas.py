@@ -4,19 +4,20 @@ from pydantic import BaseModel
 class DiffSummary(BaseModel):
     total_pages_a: int
     total_pages_b: int
-    different_pages: int
+    total_differences: int
 
 
-class PageDifference(BaseModel):
-    page: int
-    added: list[str]
-    removed: list[str]
+class WordDifference(BaseModel):
+    page_a: int | None
+    page_b: int | None
+    added: str
+    removed: str
 
 
 class CompareResult(BaseModel):
     same: bool
     summary: DiffSummary
-    differences: list[PageDifference]
+    differences: list[WordDifference]
 
 
 class CompareResponse(CompareResult):
@@ -30,13 +31,14 @@ class CompareResponse(CompareResult):
                     "summary": {
                         "total_pages_a": 3,
                         "total_pages_b": 3,
-                        "different_pages": 1,
+                        "total_differences": 2,
                     },
                     "differences": [
                         {
-                            "page": 2,
-                            "added": ["New line added in file B"],
-                            "removed": ["Original line from file A"],
+                            "page_a": 1,
+                            "page_b": 1,
+                            "removed": "...SHARED [COSDFDFTRUCTION] PARTICIPATION...",
+                            "added": "...SHARED [CONSTRUCTION] PARTICIPATION...",
                         }
                     ],
                     "elapsed_ms": 123.45,

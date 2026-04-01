@@ -97,9 +97,9 @@ def run_jobs(jobs: list[tuple[str, Path, Path]]) -> None:
         result = compare_via_api(path_a, path_b)
         out_path = save_result(name, result)
 
-        diff_count = result["summary"]["different_pages"]
+        diff_count = result["summary"]["total_differences"]
         elapsed = result.get("elapsed_ms", 0)
-        status = "SAME" if result["same"] else f"DIFF ({diff_count} page(s))"
+        status = "SAME" if result["same"] else f"DIFF ({diff_count} change(s))"
         print(f"  Result : {status}")
         print(f"  Time   : {elapsed} ms")
         print(f"  Saved  : {out_path}\n")
