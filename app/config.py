@@ -6,7 +6,7 @@ _env_path = Path(__file__).resolve().parent.parent / ".env"
 try:
     from dotenv import load_dotenv
 
-    load_dotenv(_env_path)
+    load_dotenv(_env_path, override=True)
 except ImportError:
     pass
 
@@ -20,3 +20,6 @@ SHAREPOINT_LIST_URL = os.getenv("SHAREPOINT_LIST_URL", "").strip()
 SHAREPOINT_DELETE_URL = os.getenv("SHAREPOINT_DELETE_URL", "").strip()
 SHAREPOINT_USERNAME = os.getenv("SHAREPOINT_USERNAME", "").strip()
 SHAREPOINT_PASSWORD = os.getenv("SHAREPOINT_PASSWORD", "").strip()
+
+DATABASE_URL = os.getenv("DATABASE_URL", "").strip()
+COMPARE_LOG_PATH = os.getenv("COMPARE_LOG_PATH", "logs/compare_audit.log").strip()

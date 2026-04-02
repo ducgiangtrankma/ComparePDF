@@ -1,4 +1,5 @@
 from pydantic import BaseModel
+from datetime import datetime
 
 
 class DiffSummary(BaseModel):
@@ -69,3 +70,20 @@ class SharePointListFilesRequest(BaseModel):
 
 class SharePointListFilesResponse(BaseModel):
     files: list[str]
+
+
+class CompareAuditItem(BaseModel):
+    id: int
+    source_file: str
+    target_file: str
+    same: bool
+    total_differences: int
+    elapsed_ms: float
+    created_at: datetime
+
+
+class CompareAuditHistoryResponse(BaseModel):
+    total: int
+    limit: int
+    offset: int
+    items: list[CompareAuditItem]

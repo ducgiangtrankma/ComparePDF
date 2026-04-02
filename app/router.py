@@ -1,15 +1,22 @@
 import logging
 import time
 
-from fastapi import APIRouter, File, UploadFile
+from fastapi import APIRouter, File, Query, UploadFile
 
 from app.schemas import (
     CompareResponse,
+    CompareAuditHistoryResponse,
+    CompareAuditItem,
     SharePointCompareRequest,
     SharePointListFilesRequest,
     SharePointListFilesResponse,
 )
 from app.services.ai_summary import summarize_compare_result
+from app.services.audit_service import (
+    get_compare_history,
+    write_compare_db,
+    write_compare_log,
+)
 from app.services.comparator import compare_pages
 from app.services.pdf_reader import extract_pdf_pages_text
 from app.services.sharepoint_client import download_sharepoint_file, list_sharepoint_files
@@ -36,7 +43,7 @@ async def _build_compare_response(
     except Exception as exc:
         logger.warning("AI summary failed: %s", exc)
 
-    return CompareResponse(
+    response = CompareResponse(
         same=result.same,
         summary=result.summary,
         differences=result.differences,
@@ -45,6 +52,19 @@ async def _build_compare_response(
         elapsed_ms=elapsed_ms,
         ai_summary=ai_summary,
     )
+
+    # Persist audit before returning response to client.
+    try:
+        write_compare_log(response)
+    except Exception as exc:
+        logger.warning("Write compare log failed: %s", exc)
+
+    try:
+        write_compare_db(response)
+    except Exception as exc:
+        logger.warning("Write compare DB failed: %s", exc)
+
+    return response
 
 
 @router.post("/compare-pdf", response_model=CompareResponse)
@@ -94,3 +114,29 @@ async def sharepoint_list_files(req: SharePointListFilesRequest) -> SharePointLi
         typefile=req.typefile,
     )
     return SharePointListFilesResponse(files=files)
+
+
+@router.get("/audit-history", response_model=CompareAuditHistoryResponse)
+async def audit_history(
+    limit: int = Query(20, ge=1, le=200),
+    offset: int = Query(0, ge=0),
+) -> CompareAuditHistoryResponse:
+    total, rows = get_compare_history(limit=limit, offset=offset)
+    items = [
+        CompareAuditItem(
+            id=row.id,
+            source_file=row.source_file,
+            target_file=row.target_file,
+            same=row.same,
+            total_differences=row.total_differences,
+            elapsed_ms=row.elapsed_ms,
+            created_at=row.created_at,
+        )
+        for row in rows
+    ]
+    return CompareAuditHistoryResponse(
+        total=total,
+        limit=limit,
+        offset=offset,
+        items=items,
+    )

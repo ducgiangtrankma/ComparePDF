@@ -2,6 +2,7 @@ from fastapi import FastAPI
 
 import app.config  # noqa: F401 — load .env and env vars before routes
 
+from app.db import init_db
 from app.router import router
 
 app = FastAPI(
@@ -11,3 +12,8 @@ app = FastAPI(
 )
 
 app.include_router(router)
+
+
+@app.on_event("startup")
+def on_startup() -> None:
+    init_db()

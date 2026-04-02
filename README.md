@@ -48,6 +48,30 @@ uvicorn app.main:app --reload
 
 Server chạy tại `http://127.0.0.1:8000`. Truy cập `http://127.0.0.1:8000/docs` để xem Swagger UI.
 
+## Ghi log và database
+
+Trước khi trả response cho user, hệ thống sẽ:
+- ghi log compare vào file (`COMPARE_LOG_PATH`, mặc định `logs/compare_audit.log`)
+- ghi kết quả compare vào DB PostgreSQL nếu có cấu hình `DATABASE_URL`
+
+Ví dụ `DATABASE_URL`:
+
+```bash
+DATABASE_URL=postgresql+psycopg://comparepdf_user:comparepdf_pass@localhost:5432/comparepdf
+```
+
+Chạy PostgreSQL local:
+
+```bash
+docker compose -f docker-compose.postgres.yml up -d
+```
+
+Xem lịch sử compare đã lưu trong DB:
+
+```bash
+curl "http://127.0.0.1:8000/audit-history?limit=20&offset=0"
+```
+
 ### Tóm tắt bằng AI (OpenAI, tùy chọn)
 
 Nếu đặt biến môi trường `OPENAI_API_KEY`, mỗi response của `POST /compare-pdf` sẽ thêm trường `ai_summary` — đoạn văn tiếng Việt ngắn, dễ hiểu, tóm lược các khác biệt. Không có key thì `ai_summary` là `null`, phần so sánh vẫn chạy bình thường.
@@ -125,6 +149,8 @@ curl -X POST http://127.0.0.1:8000/compare-pdf-sharepoint \
 ```json
 {
   "same": true,
+  "source_file": "Original.pdf",
+  "target_file": "OriginalEdit.pdf",
   "summary": {
     "total_pages_a": 3,
     "total_pages_b": 3,
@@ -141,6 +167,8 @@ curl -X POST http://127.0.0.1:8000/compare-pdf-sharepoint \
 ```json
 {
   "same": false,
+  "source_file": "Original.pdf",
+  "target_file": "OriginalEdit.pdf",
   "summary": {
     "total_pages_a": 3,
     "total_pages_b": 3,
