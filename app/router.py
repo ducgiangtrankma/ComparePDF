@@ -4,12 +4,13 @@ import time
 from fastapi import APIRouter, File, Query, UploadFile
 
 from app.schemas import (
-    CompareResponse,
     CompareAuditHistoryResponse,
     CompareAuditItem,
+    CompareResponse,
     SharePointCompareRequest,
     SharePointListFilesRequest,
     SharePointListFilesResponse,
+    SignatureInfo,
 )
 from app.services.ai_summary import summarize_compare_result
 from app.services.audit_service import (
@@ -18,6 +19,7 @@ from app.services.audit_service import (
     write_compare_log,
 )
 from app.services.comparator import compare_pages
+from app.services.pdf_signature import detect_digital_signatures
 from app.services.pdf_reader import extract_pdf_pages_text
 from app.services.sharepoint_client import download_sharepoint_file, list_sharepoint_files
 
@@ -34,6 +36,9 @@ async def _build_compare_response(
     pages_a = extract_pdf_pages_text(content_a, name_a)
     pages_b = extract_pdf_pages_text(content_b, name_b)
 
+    sig_a = detect_digital_signatures(content_a)
+    sig_b = detect_digital_signatures(content_b)
+
     result = compare_pages(pages_a, pages_b)
     elapsed_ms = round((time.perf_counter() - start) * 1000, 2)
 
@@ -49,6 +54,8 @@ async def _build_compare_response(
         differences=result.differences,
         source_file=name_a,
         target_file=name_b,
+        source_signature=SignatureInfo(**sig_a),
+        target_signature=SignatureInfo(**sig_b),
         elapsed_ms=elapsed_ms,
         ai_summary=ai_summary,
     )

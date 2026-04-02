@@ -1,7 +1,11 @@
+import logging
+
 from sqlalchemy import create_engine
 from sqlalchemy.orm import DeclarativeBase, sessionmaker
 
 from app.config import DATABASE_URL
+
+logger = logging.getLogger(__name__)
 
 
 class Base(DeclarativeBase):
@@ -18,4 +22,7 @@ def init_db() -> None:
     # Imported here to avoid circular imports
     from app import models  # noqa: F401
 
-    Base.metadata.create_all(bind=engine)
+    try:
+        Base.metadata.create_all(bind=engine)
+    except Exception as exc:
+        logger.warning("Database unavailable; tables not created (%s)", exc)

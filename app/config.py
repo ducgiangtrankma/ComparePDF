@@ -23,3 +23,7 @@ SHAREPOINT_PASSWORD = os.getenv("SHAREPOINT_PASSWORD", "").strip()
 
 DATABASE_URL = os.getenv("DATABASE_URL", "").strip()
 COMPARE_LOG_PATH = os.getenv("COMPARE_LOG_PATH", "logs/compare_audit.log").strip()
+
+# Persist compare rows to Postgres (test_local sets COMPARE_WRITE_DB=0)
+_write_db_raw = os.getenv("COMPARE_WRITE_DB", "").strip().lower()
+COMPARE_WRITE_DB = _write_db_raw not in ("0", "false", "no", "off")

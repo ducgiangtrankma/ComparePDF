@@ -15,6 +15,14 @@ class WordDifference(BaseModel):
     removed: str
 
 
+class SignatureInfo(BaseModel):
+    """AcroForm-based presence of signature fields (not cryptographic validation)."""
+
+    has_digital_signature: bool
+    signature_count: int
+    field_names: list[str] = []
+
+
 class CompareResult(BaseModel):
     same: bool
     summary: DiffSummary
@@ -24,6 +32,8 @@ class CompareResult(BaseModel):
 class CompareResponse(CompareResult):
     source_file: str
     target_file: str
+    source_signature: SignatureInfo
+    target_signature: SignatureInfo
     elapsed_ms: float
     ai_summary: str | None = None
 
@@ -47,6 +57,16 @@ class CompareResponse(CompareResult):
                     ],
                     "source_file": "Original.pdf",
                     "target_file": "OriginalEdit.pdf",
+                    "source_signature": {
+                        "has_digital_signature": False,
+                        "signature_count": 0,
+                        "field_names": [],
+                    },
+                    "target_signature": {
+                        "has_digital_signature": False,
+                        "signature_count": 0,
+                        "field_names": [],
+                    },
                     "elapsed_ms": 123.45,
                     "ai_summary": "Hai file khác nhau ở từ CONSTRUCTION...",
                 }

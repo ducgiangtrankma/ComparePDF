@@ -7,10 +7,12 @@ Usage:
 
 The script auto-starts the server, runs comparisons through the real API,
 then shuts the server down — identical logic to a production HTTP call.
+The child server sets COMPAREPDF_SKIP_DB_AUDIT=1 so compare results are not inserted into Postgres.
 """
 
 import argparse
 import json
+import os
 import subprocess
 import sys
 import time
@@ -160,10 +162,12 @@ def main() -> None:
     print(f"Found {len(jobs)} comparison(s) to run.\n")
     print("Starting API server...")
 
+    server_env = {**os.environ, "COMPAREPDF_SKIP_DB_AUDIT": "1"}
     server = subprocess.Popen(
         [sys.executable, "-m", "uvicorn", "app.main:app", "--port", "8000"],
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
+        env=server_env,
     )
 
     try:

@@ -1,10 +1,11 @@
 import json
 import logging
+import os
 from pathlib import Path
 
 from sqlalchemy import desc
 
-from app.config import COMPARE_LOG_PATH
+from app.config import COMPARE_LOG_PATH, COMPARE_WRITE_DB
 from app.db import SessionLocal
 from app.models import CompareAudit
 from app.schemas import CompareResponse
@@ -40,7 +41,9 @@ def write_compare_log(response: CompareResponse) -> None:
 
 
 def write_compare_db(response: CompareResponse) -> None:
-    if SessionLocal is None:
+    if os.environ.get("COMPAREPDF_SKIP_DB_AUDIT") == "1":
+        return
+    if not COMPARE_WRITE_DB or SessionLocal is None:
         return
 
     row = CompareAudit(
