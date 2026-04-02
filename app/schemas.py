@@ -1,5 +1,6 @@
-from pydantic import BaseModel
 from datetime import datetime
+
+from pydantic import BaseModel, Field
 
 
 class DiffSummary(BaseModel):
@@ -83,13 +84,30 @@ class SharePointCompareRequest(BaseModel):
 
 
 class SharePointListFilesRequest(BaseModel):
-    web_url: str | None = None
-    folder_location: str
-    typefile: str = "pdf"
+    web_url: str | None = Field(
+        default=None,
+        description="SharePoint site URL; nếu bỏ trống dùng SHAREPOINT_WEB_URL trong .env.",
+    )
+    folder_location: str = Field(
+        ...,
+        description="Đường dẫn folder trong site (vd. Shared Documents/Contracts).",
+    )
+    typefile: str = Field(
+        default="pdf",
+        description="Lọc gửi xuống Power Automate (thường pdf).",
+    )
+    strict_folder_rules: bool = Field(
+        default=True,
+        description=(
+            "Nếu true: sau khi PA trả về, chỉ chấp nhận đúng 1–2 file PDF trong folder; "
+            "0 file, >2 file, hoặc file không .pdf → 400. "
+            "Nếu false: trả về danh sách gốc (để duyệt folder nhiều file)."
+        ),
+    )
 
 
 class SharePointListFilesResponse(BaseModel):
-    files: list[str]
+    files: list[str] = Field(description="Tên file (hoặc đường dẫn tương đối) sau khi lọc.")
 
 
 class CompareAuditItem(BaseModel):

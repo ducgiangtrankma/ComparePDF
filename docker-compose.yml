@@ -1,0 +1,54 @@
+# API + PostgreSQL — deploy stack
+# Build & run:  docker compose up -d --build
+# Logs API:     docker compose logs -f api
+# Chỉ DB:       docker compose -f docker-compose.postgres.yml up -d
+
+services:
+  api:
+    build: .
+    image: comparepdf-api:latest
+    container_name: comparepdf-api
+    restart: unless-stopped
+    ports:
+      - "${API_PORT:-8000}:8000"
+    env_file:
+      - .env
+    environment:
+      # Ghi đè DATABASE_URL trong .env (thường là localhost) để container nối tới service postgres
+      DATABASE_URL: postgresql+psycopg://${POSTGRES_USER:-comparepdf_user}:${POSTGRES_PASSWORD:-comparepdf_pass}@postgres:5432/${POSTGRES_DB:-comparepdf}
+      COMPARE_LOG_PATH: ${COMPARE_LOG_PATH:-logs/compare_audit.log}
+    volumes:
+      - comparepdf_logs:/app/logs
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - comparepdf_net
+
+  postgres:
+    image: postgres:16
+    container_name: comparepdf-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-comparepdf}
+      POSTGRES_USER: ${POSTGRES_USER:-comparepdf_user}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-comparepdf_pass}
+      TZ: ${TZ:-Asia/Ho_Chi_Minh}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-comparepdf_user} -d ${POSTGRES_DB:-comparepdf}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 15s
+    networks:
+      - comparepdf_net
+
+volumes:
+  postgres_data:
+  comparepdf_logs:
+
+networks:
+  comparepdf_net:
+    driver: bridge

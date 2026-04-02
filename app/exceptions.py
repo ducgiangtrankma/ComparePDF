@@ -34,3 +34,10 @@ class SharePointError(HTTPException):
 
     def __init__(self, detail: str):
         super().__init__(status_code=status.HTTP_502_BAD_GATEWAY, detail=detail)
+
+
+class SharePointFolderRuleError(HTTPException):
+    """Folder listing or paths violate PDF-only / count rules for compare workflow."""
+
+    def __init__(self, detail: str):
+        super().__init__(status_code=status.HTTP_400_BAD_REQUEST, detail=detail)

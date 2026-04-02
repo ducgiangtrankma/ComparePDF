@@ -8,6 +8,9 @@ Usage:
 The script auto-starts the server, runs comparisons through the real API,
 then shuts the server down — identical logic to a production HTTP call.
 The child server sets COMPAREPDF_SKIP_DB_AUDIT=1 so compare results are not inserted into Postgres.
+
+Interactive mode: localPDF/ must exist; only .pdf files inside; 1 or 2 PDFs (not 0, not >2).
+CLI with two paths: both must be .pdf. --auto is unchanged (multiple *_a/_b pairs).
 """
 
 import argparse
@@ -38,10 +41,41 @@ def parse_args() -> argparse.Namespace:
     return parser.parse_args()
 
 
-def _list_local_pdfs() -> list[Path]:
+def _fail(msg: str) -> None:
+    print(f"ERROR: {msg}")
+    sys.exit(1)
+
+
+def _require_pdf_suffix(path: Path, label: str) -> None:
+    if path.suffix.lower() != ".pdf":
+        _fail(f"{label} phải là file PDF (.pdf): {path}")
+
+
+def _validated_local_pdfs_for_interactive() -> list[Path]:
+    """localPDF/: must exist; only .pdf files; count 1 or 2 (not 0, not >2)."""
     if not LOCAL_PDF_DIR.exists():
-        return []
-    return sorted([p for p in LOCAL_PDF_DIR.glob("*.pdf") if p.is_file()])
+        _fail(f"Thư mục {LOCAL_PDF_DIR}/ không tồn tại. Hãy tạo thư mục và thêm PDF.")
+    if not LOCAL_PDF_DIR.is_dir():
+        _fail(f"{LOCAL_PDF_DIR} không phải thư mục.")
+
+    files = [p for p in LOCAL_PDF_DIR.iterdir() if p.is_file()]
+    non_pdf = [p for p in files if p.suffix.lower() != ".pdf"]
+    if non_pdf:
+        names = ", ".join(p.name for p in non_pdf)
+        _fail(
+            f"Trong {LOCAL_PDF_DIR}/ chỉ được để file PDF. "
+            f"Gỡ hoặc đổi chỗ các file không phải PDF: {names}"
+        )
+
+    pdfs = sorted(p for p in files if p.suffix.lower() == ".pdf")
+    if len(pdfs) == 0:
+        _fail(f"Không có file PDF nào trong {LOCAL_PDF_DIR}/.")
+    if len(pdfs) > 2:
+        names = ", ".join(p.name for p in pdfs)
+        _fail(
+            f"{LOCAL_PDF_DIR}/ chỉ được có tối đa 2 file PDF (hiện có {len(pdfs)}): {names}"
+        )
+    return pdfs
 
 
 def _prompt_pick(files: list[Path], title: str) -> Path:
@@ -59,11 +93,7 @@ def _prompt_pick(files: list[Path], title: str) -> Path:
 
 
 def interactive_pick() -> tuple[str, Path, Path]:
-    files = _list_local_pdfs()
-    if not files:
-        print(f"No PDF files found in {LOCAL_PDF_DIR}/")
-        print("Hãy đặt PDF vào localPDF/ rồi chạy lại.")
-        sys.exit(1)
+    files = _validated_local_pdfs_for_interactive()
 
     file_a = _prompt_pick(files, "\n1) Select original file (A):")
     file_b = _prompt_pick(files, "\n2) Select file edit (B):")
@@ -120,8 +150,9 @@ def build_job_list(args: argparse.Namespace) -> list[tuple[str, Path, Path]]:
         pa, pb = Path(args.file_a), Path(args.file_b)
         for p in (pa, pb):
             if not p.exists():
-                print(f"ERROR: File not found: {p}")
-                sys.exit(1)
+                _fail(f"Không tìm thấy file: {p}")
+        _require_pdf_suffix(pa, "File A")
+        _require_pdf_suffix(pb, "File B")
         name = f"{pa.stem}_vs_{pb.stem}"
         return [(name, pa, pb)]
 

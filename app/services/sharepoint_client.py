@@ -11,11 +11,52 @@ from app.config import (
     SHAREPOINT_USERNAME,
     SHAREPOINT_WEB_URL,
 )
-from app.exceptions import SharePointError
+from app.exceptions import SharePointError, SharePointFolderRuleError
 
 
 def _normalize_location(location: str) -> str:
     return location.strip().replace("\\", "/").lstrip("/")
+
+
+def _entry_basename(entry: str) -> str:
+    return _normalize_location(entry).split("/")[-1]
+
+
+def validate_sharepoint_compare_paths(location_a: str, location_b: str) -> None:
+    """Both locations must point to a file whose name ends with .pdf."""
+    for loc, label in ((location_a, "location_a"), (location_b, "location_b")):
+        base = _entry_basename(loc)
+        if not base:
+            raise SharePointFolderRuleError(f"{label} không hợp lệ (rỗng).")
+        if not base.lower().endswith(".pdf"):
+            raise SharePointFolderRuleError(
+                f"{label} phải trỏ tới file PDF (.pdf): {loc!r}"
+            )
+
+
+def validate_sharepoint_folder_listing(names: list[str]) -> list[str]:
+    """Same rules as local interactive folder: only PDFs; 1 or 2 files (not 0, not >2)."""
+    trimmed = [str(n).strip() for n in names if n is not None and str(n).strip()]
+    if not trimmed:
+        raise SharePointFolderRuleError("Thư mục SharePoint không có file nào.")
+
+    non_pdf = [n for n in trimmed if not _entry_basename(n).lower().endswith(".pdf")]
+    if non_pdf:
+        preview = ", ".join(non_pdf[:15])
+        more = " …" if len(non_pdf) > 15 else ""
+        raise SharePointFolderRuleError(
+            "Chỉ chấp nhận file PDF trong thư mục. "
+            f"File không phải PDF: {preview}{more}"
+        )
+
+    if len(trimmed) > 2:
+        preview = ", ".join(trimmed[:10])
+        more = " …" if len(trimmed) > 10 else ""
+        raise SharePointFolderRuleError(
+            f"Thư mục chỉ được có tối đa 2 file PDF (hiện có {len(trimmed)}): {preview}{more}"
+        )
+
+    return trimmed
 
 
 def _extract_base64_from_response(raw_text: str, json_obj: Any) -> str:

@@ -21,11 +21,32 @@ from app.services.audit_service import (
 from app.services.comparator import compare_pages
 from app.services.pdf_signature import detect_digital_signatures
 from app.services.pdf_reader import extract_pdf_pages_text
-from app.services.sharepoint_client import download_sharepoint_file, list_sharepoint_files
+from app.services.sharepoint_client import (
+    download_sharepoint_file,
+    list_sharepoint_files,
+    validate_sharepoint_compare_paths,
+    validate_sharepoint_folder_listing,
+)
 
 logger = logging.getLogger(__name__)
 
 router = APIRouter()
+
+
+def _sharepoint_list_files_response(
+    folder_location: str,
+    web_url: str | None,
+    typefile: str,
+    strict_folder_rules: bool,
+) -> SharePointListFilesResponse:
+    files = list_sharepoint_files(
+        folder_location=folder_location,
+        web_url=web_url,
+        typefile=typefile,
+    )
+    if strict_folder_rules:
+        files = validate_sharepoint_folder_listing(files)
+    return SharePointListFilesResponse(files=files)
 
 
 async def _build_compare_response(
@@ -95,6 +116,7 @@ async def compare_pdf(
 @router.post("/compare-pdf-sharepoint", response_model=CompareResponse)
 async def compare_pdf_sharepoint(req: SharePointCompareRequest) -> CompareResponse:
     """Download two PDFs from SharePoint, then compare visible text content."""
+    validate_sharepoint_compare_paths(req.location_a, req.location_b)
     content_a = download_sharepoint_file(
         location=req.location_a, web_url=req.web_url, fetch_mode=req.fetch_mode
     )
@@ -113,14 +135,51 @@ async def compare_pdf_sharepoint(req: SharePointCompareRequest) -> CompareRespon
     )
 
 
-@router.post("/sharepoint/list-files", response_model=SharePointListFilesResponse)
-async def sharepoint_list_files(req: SharePointListFilesRequest) -> SharePointListFilesResponse:
-    files = list_sharepoint_files(
+@router.get(
+    "/sharepoint/list-files",
+    response_model=SharePointListFilesResponse,
+    summary="Liệt kê file trong folder SharePoint (GET)",
+    description=(
+        "Cùng logic với POST; dùng query string (phù hợp thao tác chỉ đọc). "
+        "`folder_location` cần encode URL nếu có ký tự đặc biệt."
+    ),
+)
+async def sharepoint_list_files_get(
+    folder_location: str = Query(..., description="Đường dẫn folder trong site."),
+    web_url: str | None = Query(None, description="Site URL; bỏ trống dùng .env."),
+    typefile: str = Query("pdf", description="Tham số lọc gửi Power Automate."),
+    strict_folder_rules: bool = Query(
+        True,
+        description="True: 1–2 PDF, không file khác .pdf. False: danh sách gốc từ PA.",
+    ),
+) -> SharePointListFilesResponse:
+    return _sharepoint_list_files_response(
+        folder_location=folder_location,
+        web_url=web_url,
+        typefile=typefile,
+        strict_folder_rules=strict_folder_rules,
+    )
+
+
+@router.post(
+    "/sharepoint/list-files",
+    response_model=SharePointListFilesResponse,
+    summary="Liệt kê file trong folder SharePoint (POST)",
+    description=(
+        "Giữ POST để gửi JSON body (đường folder dài, nhiều field) — không phụ thuộc GET body. "
+        "Mặc định áp quy tắc 1–2 file PDF (strict_folder_rules=true); "
+        "đặt false để nhận toàn bộ danh sách PA. Xem thêm GET cùng path."
+    ),
+)
+async def sharepoint_list_files_post(
+    req: SharePointListFilesRequest,
+) -> SharePointListFilesResponse:
+    return _sharepoint_list_files_response(
         folder_location=req.folder_location,
         web_url=req.web_url,
         typefile=req.typefile,
+        strict_folder_rules=req.strict_folder_rules,
     )
-    return SharePointListFilesResponse(files=files)
 
 
 @router.get("/audit-history", response_model=CompareAuditHistoryResponse)
