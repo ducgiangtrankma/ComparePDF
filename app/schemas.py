@@ -133,6 +133,20 @@ class SignatureCompareResponse(BaseModel):
     components: SignatureCompareComponents
 
 
+class HandSignaturePageResult(BaseModel):
+    page: int
+    has_signature: bool
+    best_score: float
+    decision: str | None = None
+    bbox: tuple[int, int, int, int] | None = None
+    components: SignatureCompareComponents | None = None
+
+
+class HandSignatureCheckResponse(BaseModel):
+    pages_a: list[HandSignaturePageResult]
+    pages_b: list[HandSignaturePageResult]
+
+
 class CompareAuditItem(BaseModel):
     id: int
     source_file: str

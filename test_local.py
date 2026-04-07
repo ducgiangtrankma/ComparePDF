@@ -24,6 +24,7 @@ from pathlib import Path
 import requests
 
 API_URL = "http://127.0.0.1:8000/compare-pdf"
+HAND_SIG_URL = "http://127.0.0.1:8000/hand_signature_check"
 OUTPUT_DIR = Path("output")
 LOCAL_PDF_DIR = Path("localPDF")
 STARTUP_TIMEOUT = 10
@@ -168,6 +169,18 @@ def build_job_list(args: argparse.Namespace) -> list[tuple[str, Path, Path]]:
     return [(name, a, b)]
 
 
+def _hand_signature_check(path_a: Path, path_b: Path) -> dict:
+    """Gọi endpoint hand_signature_check cho cặp PDF (A,B)."""
+    with open(path_a, "rb") as fa, open(path_b, "rb") as fb:
+        resp = requests.post(
+            HAND_SIG_URL,
+            files={"file_a": (path_a.name, fa), "file_b": (path_b.name, fb)},
+            timeout=60,
+        )
+    resp.raise_for_status()
+    return resp.json()
+
+
 def run_jobs(jobs: list[tuple[str, Path, Path]]) -> None:
     for name, path_a, path_b in jobs:
         print(f"Comparing: {path_a}  vs  {path_b}")
@@ -183,7 +196,20 @@ def run_jobs(jobs: list[tuple[str, Path, Path]]) -> None:
         if summary_ai:
             preview = summary_ai[:400] + ("…" if len(summary_ai) > 400 else "")
             print(f"  AI     : {preview}")
-        print(f"  Saved  : {out_path}\n")
+        print(f"  Saved  : {out_path}")
+
+        # Chạy thêm check chữ ký tay cho cùng cặp file.
+        try:
+            hand = _hand_signature_check(path_a, path_b)
+            hand_path = OUTPUT_DIR / f"{name}_hand_signature.json"
+            hand_path.write_text(
+                json.dumps(hand, indent=2, ensure_ascii=False), encoding="utf-8"
+            )
+            print(f"  HandSig: {hand_path}")
+        except Exception as exc:
+            print(f"  HandSig: ERROR ({exc})")
+
+        print()
 
 
 def main() -> None:

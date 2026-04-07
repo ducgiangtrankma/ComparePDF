@@ -7,9 +7,12 @@ from app.schemas import (
     CompareAuditHistoryResponse,
     CompareAuditItem,
     CompareResponse,
+    HandSignatureCheckResponse,
+    HandSignaturePageResult,
     SharePointCompareRequest,
     SharePointListFilesRequest,
     SharePointListFilesResponse,
+    SignatureCompareComponents,
     SignatureCompareRequest,
     SignatureCompareResponse,
     SignatureInfo,
@@ -29,6 +32,7 @@ from app.services.sharepoint_client import (
     validate_sharepoint_compare_paths,
     validate_sharepoint_folder_listing,
 )
+from app.services.hand_signature_pdf import detect_and_compare_hand_signatures
 from app.services.signature_compare import compare_signatures_base64
 
 logger = logging.getLogger(__name__)
@@ -232,3 +236,87 @@ async def signature_compare(req: SignatureCompareRequest) -> SignatureCompareRes
 
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=str(exc)) from exc
     return SignatureCompareResponse(**result)
+
+
+@router.post(
+    "/hand_signature_check",
+    response_model=HandSignatureCheckResponse,
+    summary="Phát hiện chữ ký tay ở cuối trang và so sánh với chữ ký mẫu.",
+)
+async def hand_signature_check(
+    file_a: UploadFile = File(..., description="File PDF gốc (A)."),
+    file_b: UploadFile = File(..., description="File PDF chỉnh sửa (B)."),
+    dpi: int = Query(180, ge=72, le=300),
+    roi_mode: str = Query(
+        "bottom_only",
+        pattern="^(bottom_only|bottom_then_full)$",
+        description="bottom_only: chỉ rà soát cuối trang; bottom_then_full: nếu không thấy, quét cả trang.",
+    ),
+    bottom_ratio: float = Query(
+        0.35,
+        ge=0.1,
+        le=0.7,
+        description="Tỷ lệ chiều cao đáy trang dùng làm ROI (vd 0.35 = 35% cuối trang).",
+    ),
+    page_limit: int | None = Query(
+        None,
+        ge=1,
+        description="Nếu đặt, chỉ xử lý tối đa N trang từ đầu (tăng tốc cho file rất dài).",
+    ),
+) -> HandSignatureCheckResponse:
+    """
+    Render từng trang PDF A/B, ưu tiên rà soát vùng cuối trang để tìm chữ ký tay,
+    sau đó so sánh với chữ ký mẫu `localPDF/refSignatures/refSingnature.png`.
+    """
+    content_a = await file_a.read()
+    content_b = await file_b.read()
+
+    ref_path = "localPDF/refSignatures/refSingnature.png"
+
+    params = dict(
+        dpi=dpi,
+        roi_mode=roi_mode,
+        bottom_ratio=bottom_ratio,
+        page_limit=page_limit,
+    )
+
+    pages_a_raw = detect_and_compare_hand_signatures(
+        pdf_bytes=content_a,
+        ref_image_path=ref_path,
+        **params,
+    )
+    pages_b_raw = detect_and_compare_hand_signatures(
+        pdf_bytes=content_b,
+        ref_image_path=ref_path,
+        **params,
+    )
+
+    def _to_model_list(raw_list):
+        out: list[HandSignaturePageResult] = []
+        for item in raw_list:
+            comps = item.get("components")
+            components = (
+                SignatureCompareComponents(
+                    overlap_score=comps["overlap_score"],
+                    shape_score=comps["shape_score"],
+                    projection_score=comps["projection_score"],
+                )
+                if comps
+                else None
+            )
+            out.append(
+                HandSignaturePageResult(
+                    page=item["page"],
+                    has_signature=item["has_signature"],
+                    best_score=item["best_score"],
+                    decision=item.get("decision"),
+                    bbox=tuple(item["bbox"]) if item.get("bbox") else None,
+                    components=components,
+                )
+            )
+        return out
+
+    return HandSignatureCheckResponse(
+        pages_a=_to_model_list(pages_a_raw),
+        pages_b=_to_model_list(pages_b_raw),
+    )
