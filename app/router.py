@@ -3,6 +3,7 @@ import time
 
 from fastapi import APIRouter, File, Query, UploadFile
 
+from app.config import SHAREPOINT_SIGNATURE_LOCATION
 from app.schemas import (
     CompareAuditHistoryResponse,
     CompareAuditItem,
@@ -33,11 +34,13 @@ from app.services.sharepoint_client import (
     validate_sharepoint_folder_listing,
 )
 from app.services.hand_signature_pdf import detect_and_compare_hand_signatures
+from app.services.hand_signature_pdf import detect_and_compare_hand_signatures_with_ref_bytes
 from app.services.signature_compare import compare_signatures_base64
 
 logger = logging.getLogger(__name__)
 
 router = APIRouter()
+_LOCAL_REF_SIGNATURE_PATH = "localPDF/refSignatures/refSingnature.png"
 
 
 def _sharepoint_list_files_response(
@@ -57,7 +60,11 @@ def _sharepoint_list_files_response(
 
 
 async def _build_compare_response(
-    content_a: bytes, content_b: bytes, name_a: str, name_b: str
+    content_a: bytes,
+    content_b: bytes,
+    name_a: str,
+    name_b: str,
+    ref_signature_bytes: bytes | None = None,
 ) -> CompareResponse:
     start = time.perf_counter()
 
@@ -66,6 +73,50 @@ async def _build_compare_response(
 
     sig_a = detect_digital_signatures(content_a)
     sig_b = detect_digital_signatures(content_b)
+    hand_a_raw: list[dict] = []
+    hand_b_raw: list[dict] = []
+    try:
+        if ref_signature_bytes is None:
+            with open(_LOCAL_REF_SIGNATURE_PATH, "rb") as f:
+                ref_signature_bytes = f.read()
+        hand_params = dict(dpi=180, roi_mode="bottom_then_full", bottom_ratio=0.35)
+        hand_a_raw = detect_and_compare_hand_signatures_with_ref_bytes(
+            pdf_bytes=content_a,
+            ref_image_bytes=ref_signature_bytes,
+            **hand_params,
+        )
+        hand_b_raw = detect_and_compare_hand_signatures_with_ref_bytes(
+            pdf_bytes=content_b,
+            ref_image_bytes=ref_signature_bytes,
+            **hand_params,
+        )
+    except Exception as exc:
+        logger.warning("Hand signature compare failed: %s", exc)
+
+    def _to_hand_models(raw_list: list[dict]) -> list[HandSignaturePageResult]:
+        out: list[HandSignaturePageResult] = []
+        for item in raw_list:
+            comps = item.get("components")
+            components = (
+                SignatureCompareComponents(
+                    overlap_score=comps["overlap_score"],
+                    shape_score=comps["shape_score"],
+                    projection_score=comps["projection_score"],
+                )
+                if comps
+                else None
+            )
+            out.append(
+                HandSignaturePageResult(
+                    page=item["page"],
+                    has_signature=item["has_signature"],
+                    best_score=item["best_score"],
+                    decision=item.get("decision"),
+                    bbox=tuple(item["bbox"]) if item.get("bbox") else None,
+                    components=components,
+                )
+            )
+        return out
 
     result = compare_pages(pages_a, pages_b)
     elapsed_ms = round((time.perf_counter() - start) * 1000, 2)
@@ -84,6 +135,8 @@ async def _build_compare_response(
         target_file=name_b,
         source_signature=SignatureInfo(**sig_a),
         target_signature=SignatureInfo(**sig_b),
+        source_hand_signature=_to_hand_models(hand_a_raw),
+        target_hand_signature=_to_hand_models(hand_b_raw),
         elapsed_ms=elapsed_ms,
         ai_summary=ai_summary,
     )
@@ -130,6 +183,32 @@ async def compare_pdf_sharepoint(req: SharePointCompareRequest) -> CompareRespon
     content_b = download_sharepoint_file(
         location=req.location_b, web_url=req.web_url, fetch_mode=req.fetch_mode
     )
+    ref_sig_bytes: bytes | None = None
+    sig_loc = (req.signature_location or SHAREPOINT_SIGNATURE_LOCATION).strip()
+    if sig_loc:
+        lower = sig_loc.lower()
+        if lower.endswith((".png", ".jpg", ".jpeg")):
+            ref_sig_bytes = download_sharepoint_file(
+                location=sig_loc, web_url=req.web_url, fetch_mode=req.fetch_mode
+            )
+        else:
+            entries = list_sharepoint_files(
+                folder_location=sig_loc,
+                web_url=req.web_url,
+                typefile="all",
+            )
+            img_entries = [
+                e
+                for e in entries
+                if str(e).strip().lower().endswith((".png", ".jpg", ".jpeg"))
+            ]
+            if img_entries:
+                first_img = img_entries[0]
+                base_folder = sig_loc.rstrip("/")
+                sig_file_loc = f"{base_folder}/{first_img}".replace("//", "/")
+                ref_sig_bytes = download_sharepoint_file(
+                    location=sig_file_loc, web_url=req.web_url, fetch_mode=req.fetch_mode
+                )
 
     name_a = req.location_a.split("/")[-1] or "sharepoint_file_a"
     name_b = req.location_b.split("/")[-1] or "sharepoint_file_b"
@@ -139,6 +218,7 @@ async def compare_pdf_sharepoint(req: SharePointCompareRequest) -> CompareRespon
         content_b=content_b,
         name_a=name_a,
         name_b=name_b,
+        ref_signature_bytes=ref_sig_bytes,
     )
 
 

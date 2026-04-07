@@ -35,6 +35,8 @@ class CompareResponse(CompareResult):
     target_file: str
     source_signature: SignatureInfo
     target_signature: SignatureInfo
+    source_hand_signature: list["HandSignaturePageResult"] = Field(default_factory=list)
+    target_hand_signature: list["HandSignaturePageResult"] = Field(default_factory=list)
     elapsed_ms: float
     ai_summary: str | None = None
 
@@ -80,6 +82,13 @@ class SharePointCompareRequest(BaseModel):
     web_url: str | None = None
     location_a: str
     location_b: str
+    signature_location: str | None = Field(
+        default=None,
+        description=(
+            "Đường dẫn file/folder chữ ký mẫu trên SharePoint. "
+            "Nếu là folder, hệ thống lấy ảnh .png/.jpg/.jpeg đầu tiên."
+        ),
+    )
     fetch_mode: str | None = None
 
 

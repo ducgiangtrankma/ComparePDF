@@ -178,7 +178,27 @@ def detect_and_compare_hand_signatures(
     Trả về list kết quả theo trang (1-based page index trong caller).
     """
     with open(ref_image_path, "rb") as f:
-        ref_b64 = base64.b64encode(f.read()).decode("ascii")
+        ref_bytes = f.read()
+    return detect_and_compare_hand_signatures_with_ref_bytes(
+        pdf_bytes=pdf_bytes,
+        ref_image_bytes=ref_bytes,
+        dpi=dpi,
+        roi_mode=roi_mode,
+        bottom_ratio=bottom_ratio,
+        page_limit=page_limit,
+    )
+
+
+def detect_and_compare_hand_signatures_with_ref_bytes(
+    pdf_bytes: bytes,
+    ref_image_bytes: bytes,
+    *,
+    dpi: int = 180,
+    roi_mode: RoiMode = "bottom_only",
+    bottom_ratio: float = 0.35,
+    page_limit: int | None = None,
+) -> list[dict[str, Any]]:
+    ref_b64 = base64.b64encode(ref_image_bytes).decode("ascii")
 
     doc = fitz.open(stream=pdf_bytes, filetype="pdf")
     try:
