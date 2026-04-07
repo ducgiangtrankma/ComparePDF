@@ -110,6 +110,29 @@ class SharePointListFilesResponse(BaseModel):
     files: list[str] = Field(description="Tên file (hoặc đường dẫn tương đối) sau khi lọc.")
 
 
+class SignatureCompareRequest(BaseModel):
+    signature_ref: str = Field(
+        ...,
+        description="Base64 ảnh chữ ký mẫu (PNG/JPG), có thể là data URL hoặc raw base64.",
+    )
+    signature_test: str = Field(
+        ...,
+        description="Base64 ảnh chữ ký cần so sánh (PNG/JPG), có thể là data URL hoặc raw base64.",
+    )
+
+
+class SignatureCompareComponents(BaseModel):
+    overlap_score: float
+    shape_score: float
+    projection_score: float
+
+
+class SignatureCompareResponse(BaseModel):
+    final_score: float
+    decision: str
+    components: SignatureCompareComponents
+
+
 class CompareAuditItem(BaseModel):
     id: int
     source_file: str

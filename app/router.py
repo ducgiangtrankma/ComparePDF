@@ -10,6 +10,8 @@ from app.schemas import (
     SharePointCompareRequest,
     SharePointListFilesRequest,
     SharePointListFilesResponse,
+    SignatureCompareRequest,
+    SignatureCompareResponse,
     SignatureInfo,
 )
 from app.services.ai_summary import summarize_compare_result
@@ -27,6 +29,7 @@ from app.services.sharepoint_client import (
     validate_sharepoint_compare_paths,
     validate_sharepoint_folder_listing,
 )
+from app.services.signature_compare import compare_signatures_base64
 
 logger = logging.getLogger(__name__)
 
@@ -206,3 +209,26 @@ async def audit_history(
         offset=offset,
         items=items,
     )
+
+
+@router.post(
+    "/signature_compare",
+    response_model=SignatureCompareResponse,
+    summary="So sánh 2 ảnh chữ ký (PoC simple)",
+)
+async def signature_compare(req: SignatureCompareRequest) -> SignatureCompareResponse:
+    """
+    Step 1 PoC:
+    - input: 2 base64 signature images
+    - output: final score + components (overlap/shape/projection) + decision
+    """
+    try:
+        result = compare_signatures_base64(
+            signature_ref=req.signature_ref,
+            signature_test=req.signature_test,
+        )
+    except ValueError as exc:
+        from fastapi import HTTPException, status
+
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=str(exc)) from exc
+    return SignatureCompareResponse(**result)

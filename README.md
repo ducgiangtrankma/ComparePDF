@@ -165,6 +165,33 @@ curl -X POST http://127.0.0.1:8000/compare-pdf \
   -F "file_b=@document_v2.pdf"
 ```
 
+### POST /signature_compare
+
+So sánh 2 ảnh chữ ký dạng base64 (PoC step 1 theo `compare_signature.md`).
+
+Request:
+
+```json
+{
+  "signature_ref": "base64_or_data_url",
+  "signature_test": "base64_or_data_url"
+}
+```
+
+Response:
+
+```json
+{
+  "final_score": 87.4,
+  "decision": "Khớp cao",
+  "components": {
+    "overlap_score": 90.1,
+    "shape_score": 84.2,
+    "projection_score": 85.0
+  }
+}
+```
+
 ### POST /compare-pdf-sharepoint
 
 Tải 2 file từ SharePoint rồi so sánh bằng cùng logic như `/compare-pdf`.
