@@ -22,9 +22,10 @@ class HandSignaturePageResult:
     decision: str | None
     bbox: tuple[int, int, int, int] | None
     components: dict[str, float] | None
+    matched_reference: str | None = None
 
 
-def _render_page_gray(doc: fitz.Document, page_index: int, dpi: int) -> np.ndarray:
+def _render_page_gray(doc: Any, page_index: int, dpi: int) -> np.ndarray:
     page = doc.load_page(page_index)
     zoom = dpi / 72.0
     mat = fitz.Matrix(zoom, zoom)
@@ -122,7 +123,7 @@ def _best_match_for_page(
     bin_img: np.ndarray,
     roi_mask_start_y: int,
     roi_bin: np.ndarray,
-    ref_b64: str,
+    ref_candidates: list[tuple[str, str]],
 ) -> HandSignaturePageResult:
     h, w = roi_bin.shape[:2]
     min_area = int(0.01 * w * h)
@@ -146,106 +147,22 @@ def _best_match_for_page(
         bbox_full = _pad_bbox(bbox_full, img_w=gray.shape[1], img_h=gray.shape[0])
         # So sánh trên crop binary để giảm nhiễu anti-alias từ render PDF.
         cand_b64 = _crop_to_base64(bin_img, bbox_full)
-        result = compare_signatures_base64(signature_ref=ref_b64, signature_test=cand_b64)
-        score = float(result["final_score"])
-        page_res = HandSignaturePageResult(
-            page=0,
-            # Việc quyết định đúng/sai để người dùng tự đánh giá; ở đây chỉ trả điểm.
-            has_signature=False,
-            best_score=score,
-            decision=str(result["decision"]),
-            bbox=bbox_full,
-            components={k: float(v) for k, v in result["components"].items()},
-        )
-        if best is None or page_res.best_score > best.best_score:
-            best = page_res
+        for ref_name, ref_b64 in ref_candidates:
+            result = compare_signatures_base64(signature_ref=ref_b64, signature_test=cand_b64)
+            score = float(result["final_score"])
+            page_res = HandSignaturePageResult(
+                page=0,
+                # Việc quyết định đúng/sai để người dùng tự đánh giá; ở đây chỉ trả điểm.
+                has_signature=False,
+                best_score=score,
+                decision=str(result["decision"]),
+                bbox=bbox_full,
+                components={k: float(v) for k, v in result["components"].items()},
+                matched_reference=ref_name,
+            )
+            if best is None or page_res.best_score > best.best_score:
+                best = page_res
 
     assert best is not None
     return best
-
-
-def detect_and_compare_hand_signatures(
-    pdf_bytes: bytes,
-    ref_image_path: str,
-    *,
-    dpi: int = 180,
-    roi_mode: RoiMode = "bottom_only",
-    bottom_ratio: float = 0.35,
-    page_limit: int | None = None,
-) -> list[dict[str, Any]]:
-    """
-    Render từng trang PDF, dò chữ ký tay ở cuối trang, so sánh với mẫu ref.
-    Trả về list kết quả theo trang (1-based page index trong caller).
-    """
-    with open(ref_image_path, "rb") as f:
-        ref_bytes = f.read()
-    return detect_and_compare_hand_signatures_with_ref_bytes(
-        pdf_bytes=pdf_bytes,
-        ref_image_bytes=ref_bytes,
-        dpi=dpi,
-        roi_mode=roi_mode,
-        bottom_ratio=bottom_ratio,
-        page_limit=page_limit,
-    )
-
-
-def detect_and_compare_hand_signatures_with_ref_bytes(
-    pdf_bytes: bytes,
-    ref_image_bytes: bytes,
-    *,
-    dpi: int = 180,
-    roi_mode: RoiMode = "bottom_only",
-    bottom_ratio: float = 0.35,
-    page_limit: int | None = None,
-) -> list[dict[str, Any]]:
-    ref_b64 = base64.b64encode(ref_image_bytes).decode("ascii")
-
-    doc = fitz.open(stream=pdf_bytes, filetype="pdf")
-    try:
-        total_pages = doc.page_count
-        if page_limit is not None:
-            total_pages = min(total_pages, page_limit)
-
-        results: list[dict[str, Any]] = []
-        for idx in range(total_pages):
-            gray = _render_page_gray(doc, idx, dpi=dpi)
-            bin_img = _binarize(gray)
-
-            # Bước 1: chỉ quét đáy trang
-            roi_bin, offset_y = _bottom_roi(bin_img, bottom_ratio=bottom_ratio)
-            best = _best_match_for_page(
-                gray=gray,
-                bin_img=bin_img,
-                roi_mask_start_y=offset_y,
-                roi_bin=roi_bin,
-                ref_b64=ref_b64,
-            )
-            best.page = idx + 1
-
-            # Nếu cho phép fallback toàn trang (ví dụ chữ ký không nằm hẳn dưới đáy)
-            if roi_mode == "bottom_then_full":
-                full_best = _best_match_for_page(
-                    gray=gray,
-                    bin_img=bin_img,
-                    roi_mask_start_y=0,
-                    roi_bin=bin_img,
-                    ref_b64=ref_b64,
-                )
-                full_best.page = idx + 1
-                if full_best.best_score > best.best_score:
-                    best = full_best
-
-            results.append(
-                {
-                    "page": best.page,
-                    "has_signature": best.has_signature,
-                    "best_score": round(best.best_score, 1),
-                    "decision": best.decision,
-                    "bbox": best.bbox,
-                    "components": best.components,
-                }
-            )
-        return results
-    finally:
-        doc.close()
 

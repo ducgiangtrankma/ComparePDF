@@ -24,6 +24,22 @@ class SignatureInfo(BaseModel):
     field_names: list[str] = []
 
 
+class SignatureCompareComponents(BaseModel):
+    overlap_score: float
+    shape_score: float
+    projection_score: float
+
+
+class HandSignaturePageResult(BaseModel):
+    page: int
+    has_signature: bool
+    best_score: float
+    decision: str | None = None
+    bbox: tuple[int, int, int, int] | None = None
+    components: SignatureCompareComponents | None = None
+    matched_reference: str | None = None
+
+
 class CompareResult(BaseModel):
     same: bool
     summary: DiffSummary
@@ -35,8 +51,8 @@ class CompareResponse(CompareResult):
     target_file: str
     source_signature: SignatureInfo
     target_signature: SignatureInfo
-    source_hand_signature: list["HandSignaturePageResult"] = Field(default_factory=list)
-    target_hand_signature: list["HandSignaturePageResult"] = Field(default_factory=list)
+    source_hand_signature: list[HandSignaturePageResult] = Field(default_factory=list)
+    target_hand_signature: list[HandSignaturePageResult] = Field(default_factory=list)
     elapsed_ms: float
     ai_summary: str | None = None
 
@@ -86,7 +102,7 @@ class SharePointCompareRequest(BaseModel):
         default=None,
         description=(
             "Đường dẫn file/folder chữ ký mẫu trên SharePoint. "
-            "Nếu là folder, hệ thống lấy ảnh .png/.jpg/.jpeg đầu tiên."
+            "Nếu là folder, hệ thống lấy tất cả ảnh .png/.jpg/.jpeg trong folder."
         ),
     )
     fetch_mode: str | None = None
@@ -130,25 +146,10 @@ class SignatureCompareRequest(BaseModel):
     )
 
 
-class SignatureCompareComponents(BaseModel):
-    overlap_score: float
-    shape_score: float
-    projection_score: float
-
-
 class SignatureCompareResponse(BaseModel):
     final_score: float
     decision: str
     components: SignatureCompareComponents
-
-
-class HandSignaturePageResult(BaseModel):
-    page: int
-    has_signature: bool
-    best_score: float
-    decision: str | None = None
-    bbox: tuple[int, int, int, int] | None = None
-    components: SignatureCompareComponents | None = None
 
 
 class HandSignatureCheckResponse(BaseModel):
