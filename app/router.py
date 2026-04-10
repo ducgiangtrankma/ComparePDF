@@ -163,10 +163,19 @@ async def _build_compare_response(
     return response
 
 
-@router.post("/compare-pdf", response_model=CompareResponse)
+@router.post(
+    "/compare-pdf",
+    response_model=CompareResponse,
+    tags=["compare"],
+    summary="So sánh hai PDF (upload)",
+    description=(
+        "Nhận hai file PDF qua multipart. Trả về diff từng từ, thông tin ký số AcroForm, "
+        "kết quả chữ ký tay (so với mẫu mặc định trên server), `elapsed_ms` và `ai_summary` nếu bật AI."
+    ),
+)
 async def compare_pdf(
-    file_a: UploadFile = File(..., description="First PDF file"),
-    file_b: UploadFile = File(..., description="Second PDF file"),
+    file_a: UploadFile = File(..., description="PDF thứ nhất (A / nguồn)."),
+    file_b: UploadFile = File(..., description="PDF thứ hai (B / đích)."),
 ) -> CompareResponse:
     """Compare the visible text content of two PDF files (word-level + optional AI summary)."""
     content_a = await file_a.read()
@@ -181,7 +190,16 @@ async def compare_pdf(
     )
 
 
-@router.post("/compare-pdf-sharepoint", response_model=CompareResponse)
+@router.post(
+    "/compare-pdf-sharepoint",
+    response_model=CompareResponse,
+    tags=["compare"],
+    summary="So sánh hai PDF từ SharePoint",
+    description=(
+        "Tải hai PDF theo `location_a` / `location_b`. Tùy chọn `signature_location`: file ảnh mẫu "
+        "hoặc folder chứa .png/.jpg để so khớp chữ ký tay. Cùng pipeline diff + audit như `/compare-pdf`."
+    ),
+)
 async def compare_pdf_sharepoint(req: SharePointCompareRequest) -> CompareResponse:
     """Download two PDFs from SharePoint, then compare visible text content."""
     validate_sharepoint_compare_paths(req.location_a, req.location_b)
@@ -237,6 +255,7 @@ async def compare_pdf_sharepoint(req: SharePointCompareRequest) -> CompareRespon
 @router.get(
     "/sharepoint/list-files",
     response_model=SharePointListFilesResponse,
+    tags=["sharepoint"],
     summary="Liệt kê file trong folder SharePoint (GET)",
     description=(
         "Cùng logic với POST; dùng query string (phù hợp thao tác chỉ đọc). "
@@ -263,6 +282,7 @@ async def sharepoint_list_files_get(
 @router.post(
     "/sharepoint/list-files",
     response_model=SharePointListFilesResponse,
+    tags=["sharepoint"],
     summary="Liệt kê file trong folder SharePoint (POST)",
     description=(
         "Giữ POST để gửi JSON body (đường folder dài, nhiều field) — không phụ thuộc GET body. "
@@ -281,10 +301,16 @@ async def sharepoint_list_files_post(
     )
 
 
-@router.get("/audit-history", response_model=CompareAuditHistoryResponse)
+@router.get(
+    "/audit-history",
+    response_model=CompareAuditHistoryResponse,
+    tags=["audit"],
+    summary="Lịch sử so sánh (phân trang)",
+    description="Danh sách các lần so sánh đã ghi nhận (DB), sắp theo thời gian mới nhất.",
+)
 async def audit_history(
-    limit: int = Query(20, ge=1, le=200),
-    offset: int = Query(0, ge=0),
+    limit: int = Query(20, ge=1, le=200, description="Số bản ghi tối đa mỗi request."),
+    offset: int = Query(0, ge=0, description="Bỏ qua N bản ghi (offset phân trang)."),
 ) -> CompareAuditHistoryResponse:
     total, rows = get_compare_history(limit=limit, offset=offset)
     items = [
@@ -310,7 +336,9 @@ async def audit_history(
 @router.post(
     "/signature_compare",
     response_model=SignatureCompareResponse,
+    tags=["signatures"],
     summary="So sánh 2 ảnh chữ ký (PoC simple)",
+    description="Hai ảnh base64; trả điểm tổng, quyết định và các thành phần overlap/shape/projection.",
 )
 async def signature_compare(req: SignatureCompareRequest) -> SignatureCompareResponse:
     """
@@ -333,7 +361,12 @@ async def signature_compare(req: SignatureCompareRequest) -> SignatureCompareRes
 @router.post(
     "/hand_signature_check",
     response_model=HandSignatureCheckResponse,
+    tags=["signatures"],
     summary="Phát hiện chữ ký tay ở cuối trang và so sánh với chữ ký mẫu.",
+    description=(
+        "Không chạy full text diff. Chỉ render trang, tìm ROI chữ ký và so với file mẫu cố định trên server "
+        "(localPDF/refSignatures/refSingnature.png). Tham số dpi/roi_mode/bottom_ratio/page_limit điều chỉnh độ chính xác/tốc độ."
+    ),
 )
 async def hand_signature_check(
     file_a: UploadFile = File(..., description="File PDF gốc (A)."),
