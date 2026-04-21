@@ -1,10 +1,12 @@
 import logging
 import time
+from datetime import UTC, datetime
 
 from fastapi import APIRouter, File, Query, UploadFile
 
 from app.config import SHAREPOINT_SIGNATURE_LOCATION
 from app.schemas import (
+    CompareResponseV2,
     CompareAuditHistoryResponse,
     CompareAuditItem,
     CompareResponse,
@@ -18,6 +20,7 @@ from app.schemas import (
     SignatureCompareResponse,
     SignatureInfo,
 )
+from app.services.compare_v2_builder import build_compare_response_v2
 from app.services.ai_summary import summarize_compare_result
 from app.services.audit_service import (
     get_compare_history,
@@ -249,6 +252,76 @@ async def compare_pdf_sharepoint(req: SharePointCompareRequest) -> CompareRespon
         name_b=name_b,
         ref_signature_bytes=ref_sig_bytes,
         ref_signature_candidates=ref_sig_candidates,
+    )
+
+
+@router.post(
+    "/compare-pdf-sharepoint-v2",
+    response_model=CompareResponseV2,
+    tags=["compare"],
+    summary="So sánh hai PDF từ SharePoint (v2 cho FE jump-to-anchor)",
+    description=(
+        "Giữ nguyên pipeline compare hiện tại để tương thích production, "
+        "sau đó enrich response với metadata v2 và anchor tọa độ normalized để FE nhảy đúng vị trí trên PDF."
+    ),
+)
+async def compare_pdf_sharepoint_v2(req: SharePointCompareRequest) -> CompareResponseV2:
+    validate_sharepoint_compare_paths(req.location_a, req.location_b)
+    content_a = download_sharepoint_file(
+        location=req.location_a, web_url=req.web_url, fetch_mode=req.fetch_mode
+    )
+    content_b = download_sharepoint_file(
+        location=req.location_b, web_url=req.web_url, fetch_mode=req.fetch_mode
+    )
+    ref_sig_bytes: bytes | None = None
+    ref_sig_candidates: list[tuple[str, bytes]] | None = None
+    sig_loc = (req.signature_location or SHAREPOINT_SIGNATURE_LOCATION).strip()
+    if sig_loc:
+        lower = sig_loc.lower()
+        if lower.endswith((".png", ".jpg", ".jpeg")):
+            ref_sig_bytes = download_sharepoint_file(
+                location=sig_loc, web_url=req.web_url, fetch_mode=req.fetch_mode
+            )
+        else:
+            entries = list_sharepoint_files(
+                folder_location=sig_loc,
+                web_url=req.web_url,
+                typefile="all",
+            )
+            img_entries = [
+                e
+                for e in entries
+                if str(e).strip().lower().endswith((".png", ".jpg", ".jpeg"))
+            ]
+            if img_entries:
+                base_folder = sig_loc.rstrip("/")
+                ref_sig_candidates = []
+                for file_name in img_entries:
+                    sig_file_loc = f"{base_folder}/{file_name}".replace("//", "/")
+                    ref_bytes = download_sharepoint_file(
+                        location=sig_file_loc, web_url=req.web_url, fetch_mode=req.fetch_mode
+                    )
+                    ref_sig_candidates.append((str(file_name), ref_bytes))
+
+    name_a = req.location_a.split("/")[-1] or "sharepoint_file_a"
+    name_b = req.location_b.split("/")[-1] or "sharepoint_file_b"
+
+    compare_response = await _build_compare_response(
+        content_a=content_a,
+        content_b=content_b,
+        name_a=name_a,
+        name_b=name_b,
+        ref_signature_bytes=ref_sig_bytes,
+        ref_signature_candidates=ref_sig_candidates,
+    )
+    request_id = datetime.now(UTC).strftime("cmp_%Y%m%d_%H%M%S_v2")
+    return build_compare_response_v2(
+        compare_response=compare_response,
+        content_a=content_a,
+        content_b=content_b,
+        source_path=req.location_a,
+        target_path=req.location_b,
+        request_id=request_id,
     )
 
 

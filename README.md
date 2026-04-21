@@ -6,7 +6,7 @@ REST API so sánh **text hiển thị** giữa hai file PDF (diff theo từ + t�
 
 | Khu vực | Mô tả |
 |--------|--------|
-| So sánh | `POST /compare-pdf` (upload), `POST /compare-pdf-sharepoint` (tải 2 file từ SharePoint) |
+| So sánh | `POST /compare-pdf` (upload), `POST /compare-pdf-sharepoint` (v1), `POST /compare-pdf-sharepoint-v2` (FE anchor) |
 | Chữ ký (bước 1) | Mỗi response có `source_signature` / `target_signature` (`has_digital_signature`, `signature_count`, `field_names`) |
 | SharePoint | `GET` và `POST /sharepoint/list-files`; ràng buộc folder (1–2 PDF) có thể tắt bằng `strict_folder_rules=false` |
 | Audit | Log file + bảng `compare_audit`; `GET /audit-history` |
@@ -18,6 +18,7 @@ REST API so sánh **text hiển thị** giữa hai file PDF (diff theo từ + t�
 |-------------|-----------|---------|
 | `POST` | `/compare-pdf` | Upload 2 PDF (`multipart`) |
 | `POST` | `/compare-pdf-sharepoint` | JSON: `location_a`, `location_b` (phải `.pdf`), `web_url`, `fetch_mode` |
+| `POST` | `/compare-pdf-sharepoint-v2` | Giữ logic v1 + trả metadata/anchor normalized cho FE jump-to-position |
 | `GET` | `/sharepoint/list-files` | Query: `folder_location`, `web_url`, `typefile`, `strict_folder_rules` |
 | `POST` | `/sharepoint/list-files` | JSON body cùng tham số |
 | `GET` | `/audit-history` | Query: `limit`, `offset` |

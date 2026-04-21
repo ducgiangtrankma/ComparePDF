@@ -198,3 +198,86 @@ class CompareAuditHistoryResponse(BaseModel):
     limit: int = Field(description="Giới hạn đã yêu cầu.")
     offset: int = Field(description="Offset đã yêu cầu.")
     items: list[CompareAuditItem]
+
+
+class AnchorBox(BaseModel):
+    x: float = Field(description="Tọa độ X chuẩn hóa theo chiều rộng trang (0-1).")
+    y: float = Field(description="Tọa độ Y chuẩn hóa theo chiều cao trang (0-1).")
+    width: float = Field(description="Chiều rộng chuẩn hóa (0-1).")
+    height: float = Field(description="Chiều cao chuẩn hóa (0-1).")
+
+
+class CompareV2Difference(BaseModel):
+    diff_id: str = Field(description="Mã định danh khác biệt.")
+    type: str = Field(description="Loại khác biệt: text_replace, text_insert, text_delete.")
+    page_a: int | None = Field(default=None, description="Số trang phía A (1-based).")
+    page_b: int | None = Field(default=None, description="Số trang phía B (1-based).")
+    removed: str = Field(default="", description="Đoạn text bị loại bỏ ở phía A.")
+    added: str = Field(default="", description="Đoạn text được thêm ở phía B.")
+    confidence: float = Field(description="Độ tin cậy phát hiện khác biệt (0-1).")
+    anchor_a: AnchorBox | None = Field(default=None, description="Vùng neo trên PDF A.")
+    anchor_b: AnchorBox | None = Field(default=None, description="Vùng neo trên PDF B.")
+
+
+class CompareV2FileInfo(BaseModel):
+    name: str = Field(description="Tên file.")
+    path: str = Field(description="Đường dẫn file nguồn.")
+    pages: int = Field(description="Số trang PDF.")
+
+
+class CompareV2Summary(BaseModel):
+    total_pages_a: int
+    total_pages_b: int
+    total_differences: int
+    has_digital_signature_a: bool
+    has_digital_signature_b: bool
+
+
+class CoordinateRange(BaseModel):
+    x: tuple[float, float] = (0.0, 1.0)
+    y: tuple[float, float] = (0.0, 1.0)
+    width: tuple[float, float] = (0.0, 1.0)
+    height: tuple[float, float] = (0.0, 1.0)
+
+
+class CoordinateSystem(BaseModel):
+    unit: str = "normalized"
+    origin: str = "top_left"
+    range: CoordinateRange = Field(default_factory=CoordinateRange)
+
+
+class CompareV2SignatureItem(BaseModel):
+    page: int
+    best_score: float
+    decision: str | None = None
+    matched_reference: str | None = None
+    anchor: AnchorBox | None = None
+
+
+class CompareV2Signatures(BaseModel):
+    source_hand_signature: list[CompareV2SignatureItem] = Field(default_factory=list)
+    target_hand_signature: list[CompareV2SignatureItem] = Field(default_factory=list)
+
+
+class CompareV2Warning(BaseModel):
+    code: str
+    message: str
+    pages: list[int] = Field(default_factory=list)
+
+
+class CompareV2Links(BaseModel):
+    diff_report_url: str | None = None
+
+
+class CompareResponseV2(BaseModel):
+    version: str = "2.0"
+    generated_at: str = Field(description="Thời điểm sinh kết quả ở UTC ISO-8601.")
+    request_id: str
+    source_file: CompareV2FileInfo
+    target_file: CompareV2FileInfo
+    summary: CompareV2Summary
+    coordinate_system: CoordinateSystem = Field(default_factory=CoordinateSystem)
+    differences: list[CompareV2Difference] = Field(default_factory=list)
+    signatures: CompareV2Signatures = Field(default_factory=CompareV2Signatures)
+    warnings: list[CompareV2Warning] = Field(default_factory=list)
+    links: CompareV2Links = Field(default_factory=CompareV2Links)
